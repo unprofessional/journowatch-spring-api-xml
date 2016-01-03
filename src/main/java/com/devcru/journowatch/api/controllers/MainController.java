@@ -2,8 +2,6 @@ package com.devcru.journowatch.api.controllers;
 
 import com.devcru.journowatch.api.daoimpl.UserDaoImpl;
 import com.devcru.journowatch.api.objects.User;
-import com.google.common.collect.ImmutableMap;
-
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import static org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString;
 
