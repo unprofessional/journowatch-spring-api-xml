@@ -43,7 +43,8 @@
 
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="dataSource">
-		<property name="url" value="OPENSHIFT_POSTGRESQL_DB_URL" />
+		<property name="url" value="jdbc:${OPENSHIFT_POSTGRESQL_DB_URL}" />
+		<!-- May need to add  -->
 	</bean>
 
 	<bean id="userDao" class="com.devcru.journowatch.api.daoimpl.UserDaoImpl">
