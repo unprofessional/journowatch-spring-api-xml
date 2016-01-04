@@ -61,9 +61,9 @@ public class MainController {
 		System.out.println("user.getRole: " + user.getRole());
 		System.out.println("user.getPassword: " + user.getPassword());
 		
-		userDao.addUser(user);
+		boolean status = userDao.addUser(user);
 		
-		return null;
+		return status + "";
 	}
 
     @RequestMapping(value="/login", method=RequestMethod.POST)

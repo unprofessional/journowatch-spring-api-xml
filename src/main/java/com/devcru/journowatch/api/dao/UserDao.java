@@ -8,7 +8,7 @@ import com.devcru.journowatch.api.objects.User;
 
 public interface UserDao {
 	
-	public void addUser(User user);
+	public boolean addUser(User user);
 	
 	public void getUser(User user);
 	

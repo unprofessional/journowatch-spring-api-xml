@@ -45,8 +45,10 @@ public class UserDaoImpl implements UserDao {
 	/* CRUD Operations */
 
 	@Override
-	public void addUser(User user) {
-		final String sql = "INSERT INTO users (username, email, firstname, lastname, role, password) VALUES (?, ?, ?, ?, ?, ?)";
+	public boolean addUser(User user) {
+		boolean isSuccess = false;
+		String sql = "INSERT INTO users (username, email, firstname, lastname, role, password) VALUES (?, ?, ?, ?, ?, ?)";
+		
 		String username = user.getUsername();
 		String email = user.getEmail();
 		String firstName = user.getFirstName();
@@ -55,10 +57,14 @@ public class UserDaoImpl implements UserDao {
 		String password = user.getPassword();
 		
 		try {
+			isSuccess = true;
 			template.update(sql, username, email, firstName, lastName, role, password);
 		} catch (DataAccessException e) {
+			isSuccess = false;
 			e.printStackTrace();
 		}
+		
+		return isSuccess;
 		
 	}
 
