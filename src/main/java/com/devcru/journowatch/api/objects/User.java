@@ -1,16 +1,24 @@
 package com.devcru.journowatch.api.objects;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Monitored on 12/25/2015. User model class (POJO)
  */
 
 public class User {
 
+	@JsonProperty("username")
 	private String username = null;
+	@JsonProperty("email")
 	private String email = null;
-	private String firstName = null;
-	private String lastName = null;
+	@JsonProperty("firstname")
+	private String firstname = null;
+	@JsonProperty("lastname")
+	private String lastname = null;
+	@JsonProperty("role")
 	private String role = null; // Separate into relationship-table later?
+	@JsonProperty("password")
 	private String password = null;
 
 	public String getUsername() {
@@ -30,19 +38,19 @@ public class User {
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return firstname;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstname = firstName;
 	}
 
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastname = lastName;
 	}
 
 	public String getRole() {
