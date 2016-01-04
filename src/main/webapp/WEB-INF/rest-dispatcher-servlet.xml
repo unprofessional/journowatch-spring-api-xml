@@ -32,12 +32,18 @@
 	<!-- <property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] 
 		}" /> -->
 	<!-- </bean> -->
+	
+	<!-- This locates the DATABASE_URL environment variable on Heroku and fetches 
+		the credentials. We do this to avoid hard-coding the credentials in the project 
+		repository. Note that this will completely break when deployed locally, so 
+		adding a local-only database.properties file may be in order. -->
+<!-- 	<bean class="java.net.URI" id="dbUrl"> -->
+<!-- 		<constructor-arg value="#{systemEnvironment['DATABASE_URL']}" /> -->
+<!-- 	</bean> -->
 
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="url" value="jdbc:postgresql://localhost:8998" />
-		<property name="username" value="regular" />
-		<property name="password" value="sage" />
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSource">
+		<property name="url" value="OPENSHIFT_POSTGRESQL_DB_URL" />
 	</bean>
 
 	<bean id="userDao" class="com.devcru.journowatch.api.daoimpl.UserDaoImpl">
