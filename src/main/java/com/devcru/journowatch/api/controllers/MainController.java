@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString;
@@ -55,37 +56,26 @@ public class MainController {
 	@ResponseBody
 	public String createUser(@RequestBody User user) {
 		
-		System.out.println("user.getUsername: " + user.getUsername());
-		System.out.println("user.getEmail: " + user.getEmail());
-		System.out.println("user.getFirstName: " + user.getFirstName());
-		System.out.println("user.getLastName: " + user.getLastName());
-		System.out.println("user.getRole: " + user.getRole());
-		System.out.println("user.getPassword: " + user.getPassword());
+//		System.out.println("user.getUsername: " + user.getUsername());
+//		System.out.println("user.getEmail: " + user.getEmail());
+//		System.out.println("user.getFirstName: " + user.getFirstName());
+//		System.out.println("user.getLastName: " + user.getLastName());
+//		System.out.println("user.getRole: " + user.getRole());
+//		System.out.println("user.getPassword: " + user.getPassword());
 		
 		boolean status = userDao.addUser(user);
 		
 		return status + "";
 	}
 	
-	@RequestMapping(value="/user", method=RequestMethod.GET)
+	@RequestMapping(value="/user/{username}", method=RequestMethod.GET)
 	@ResponseBody
-	public User createUser() {
+	public User createUser(@RequestParam("username") String username) {
 		
-		// DEBUG
 		User user = new User();
-		user.setUsername("regular");
-		user.setEmail("rs@email.com");
-		user.setFirstName("regular");
-		user.setLastName("sage");
-		user.setRole("USER_ROLE");
-		user.setPassword("password");
+		user.setUsername(username);
 		
-		System.out.println("user.getUsername: " + user.getUsername());
-		System.out.println("user.getEmail: " + user.getEmail());
-		System.out.println("user.getFirstName: " + user.getFirstName());
-		System.out.println("user.getLastName: " + user.getLastName());
-		System.out.println("user.getRole: " + user.getRole());
-		System.out.println("user.getPassword: " + user.getPassword());
+		user = userDao.getUserByUsername(user);
 		
 		return user;
 	}

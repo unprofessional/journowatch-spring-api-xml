@@ -10,7 +10,7 @@ public interface UserDao {
 	
 	public boolean addUser(User user);
 	
-	public void getUser(User user);
+	public User getUserByUsername(User user); // Change this to getUser() that can check for UUID and email, too
 	
 	public void updateUser(User user);
 	

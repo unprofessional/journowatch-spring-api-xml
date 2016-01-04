@@ -1,5 +1,7 @@
 package com.devcru.journowatch.api.objects;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -8,18 +10,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
+	@JsonProperty("Uuid")
+	private UUID uuid = null;
 	@JsonProperty("username")
 	private String username = null;
 	@JsonProperty("email")
 	private String email = null;
 	@JsonProperty("firstname")
-	private String firstname = null;
+	private String firstName = null;
 	@JsonProperty("lastname")
-	private String lastname = null;
+	private String lastName = null;
 	@JsonProperty("role")
-	private String role = null; // Separate into relationship-table later?
+	private String role = null; // Separate into relationship-table later? Use additive permissions ala Linux
 	@JsonProperty("password")
 	private String password = null;
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
 
 	public String getUsername() {
 		return username;
@@ -38,19 +50,19 @@ public class User {
 	}
 
 	public String getFirstName() {
-		return firstname;
+		return firstName;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstname = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastname = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getRole() {

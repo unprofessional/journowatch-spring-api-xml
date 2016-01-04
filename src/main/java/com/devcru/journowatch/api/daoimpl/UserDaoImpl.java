@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.sql.DataSource;
 
@@ -29,6 +36,17 @@ public class UserDaoImpl implements UserDao {
 	public void setDataSource(DataSource ds) {
 		this.template = new JdbcTemplate(ds);
 	}
+	
+
+	// To be used for all query() calls since they allow for possible null returns
+	// whereas queryForWhatever() does not
+	ResultSetExtractor<String> rse = new ResultSetExtractor<String>() {
+		@Override
+		public String extractData(ResultSet rs) throws SQLException,
+				DataAccessException {
+			return (rs.next() ? rs.getString(1) : null);
+		}
+	};
 
 	public void login() {
 		template.execute(loginSql);
@@ -57,8 +75,8 @@ public class UserDaoImpl implements UserDao {
 		String password = user.getPassword();
 		
 		try {
-			isSuccess = true;
 			template.update(sql, username, email, firstName, lastName, role, password);
+			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
 			e.printStackTrace();
@@ -69,9 +87,33 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void getUser(User user) {
-		// TODO Auto-generated method stub
+	public User getUserByUsername(User user) {
 		
+		//boolean isSuccess = false;
+		String sql = "SELECT * FROM users WHERE username=?";
+		List<Map<String, Object>> rows = null;
+		
+		String username = user.getUsername();
+		
+		try {
+			rows = template.queryForList(sql, new Object[]{username}, rse);
+			//isSuccess = true;
+		} catch (DataAccessException e) {
+			//isSuccess = false;
+			e.printStackTrace();
+		}
+		
+		for(Map<String, Object> row : rows) {
+			user.setUuid((UUID)row.get("uuid"));
+			user.setEmail((String)row.get("email"));
+			user.setUsername((String)row.get("username"));
+			user.setFirstName((String)row.get("firstname"));
+			user.setLastName((String)row.get("lastname"));
+			user.setRole((String)row.get("role"));
+			user.setPassword(null); // Is this necessary?
+		}
+		
+		return user;		
 	}
 
 	@Override
