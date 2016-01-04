@@ -43,6 +43,7 @@
 
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="dataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:${OPENSHIFT_POSTGRESQL_DB_URL}" />
 		<!-- May need to add  -->
 	</bean>
