@@ -65,6 +65,29 @@ public class MainController {
 		
 		return status + "";
 	}
+	
+	@RequestMapping(value="/user", method=RequestMethod.GET)
+	@ResponseBody
+	public User createUser() {
+		
+		// DEBUG
+		User user = new User();
+		user.setUsername("regular");
+		user.setEmail("rs@email.com");
+		user.setFirstName("regular");
+		user.setLastName("sage");
+		user.setRole("USER_ROLE");
+		user.setPassword("password");
+		
+		System.out.println("user.getUsername: " + user.getUsername());
+		System.out.println("user.getEmail: " + user.getEmail());
+		System.out.println("user.getFirstName: " + user.getFirstName());
+		System.out.println("user.getLastName: " + user.getLastName());
+		System.out.println("user.getRole: " + user.getRole());
+		System.out.println("user.getPassword: " + user.getPassword());
+		
+		return user;
+	}
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public static Object logTheFuckIn(User user) {
