@@ -10,6 +10,7 @@ import freemarker.template.TemplateNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,7 +53,7 @@ public class MainController {
 	
 	@RequestMapping(value="/user", method=RequestMethod.POST)
 	@ResponseBody
-	public String createUser(User user) {
+	public String createUser(@RequestBody User user) {
 		
 		System.out.println("user.getUsername: " + user.getUsername());
 		System.out.println("user.getEmail: " + user.getEmail());
