@@ -5,6 +5,7 @@ import com.devcru.journowatch.api.objects.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -15,13 +16,11 @@ import javax.sql.DataSource;
 
 public class UserDaoImpl implements UserDao {
 
-	// Use CONSTANTS later
+	// Use LOCAL SCOPE later
 
 	private String loginSql = "";
 	private String rateVenueSql = "";
 	private String rateJourno = "";
-	
-	private String addSql = "";
 
 	protected JdbcTemplate template;
 
@@ -47,13 +46,20 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void addUser(User user) {
+		final String sql = "INSERT INTO users (username, email, firstname, lastname, role, password) VALUES (?, ?, ?, ?, ?, ?)";
 		String username = user.getUsername();
 		String email = user.getEmail();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
 		String role = user.getRole();
 		String password = user.getPassword();
-		template.update(addSql, username, email, firstName, lastName, role, password);
+		
+		try {
+			template.update(sql, username, email, firstName, lastName, role, password);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
