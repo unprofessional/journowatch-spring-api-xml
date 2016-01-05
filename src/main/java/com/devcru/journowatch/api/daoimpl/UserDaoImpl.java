@@ -107,16 +107,21 @@ public class UserDaoImpl implements UserDao {
 		
 		//boolean isSuccess = false;
 		String sql = "SELECT uuid, username, email, firstname, lastname FROM users WHERE username = ?";
+		
+		String sql2 = "SELECT uuid FROM users WHERE username = ?";
+		
 		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
 		
-		try {
-			rows = template.queryForList(sql, username, rse);
-		} catch (DataAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			rows = template.queryForList(sql, username, rse);
+//		} catch (DataAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		rows = template.queryForList(sql2, username, rseObject);
 		
 		// Debug
 		for(int i = 0; i < rows.size(); i++) {
