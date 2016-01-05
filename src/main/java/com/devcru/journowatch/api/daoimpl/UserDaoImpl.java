@@ -107,8 +107,8 @@ public class UserDaoImpl implements UserDao {
 			user.setUuid((UUID)row.get("uuid"));
 			user.setEmail((String)row.get("email"));
 			user.setUsername((String)row.get("username"));
-			user.setFirstName((String)row.get("firstname"));
-			user.setLastName((String)row.get("lastname"));
+			user.setFirstName((String)row.get("firstName"));
+			user.setLastName((String)row.get("lastName"));
 			user.setRole((String)row.get("role"));
 			user.setPassword(null); // Is this necessary?
 		}
