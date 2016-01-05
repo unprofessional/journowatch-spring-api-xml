@@ -107,12 +107,12 @@ public class UserDaoImpl implements UserDao {
 		
 		//boolean isSuccess = false;
 		String sql = "SELECT username, email, firstname, lastname FROM users WHERE username = ?";
-		List<Map> rows = null;
+		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
 		
 		try {
-			rows = (List<Map>) template.queryForMap(sql, new Object[]{username}, rse);
+			rows = template.queryForList(sql, new Object[]{username}, rse);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +122,7 @@ public class UserDaoImpl implements UserDao {
 			System.out.println("rows.get(i): " + rows.get(i));
 		}
 		
-		for(Map row : rows) {
+		for(Map<String, Object> row : rows) {
 			user.setUuid((UUID)row.get("uuid"));
 			user.setEmail((String)row.get("email"));
 			user.setUsername((String)row.get("username"));
@@ -133,6 +133,27 @@ public class UserDaoImpl implements UserDao {
 		}
 		
 		return user;		
+	}
+	
+	@Override
+	public UUID getUuid(String username) {
+		String uuidStr = "";
+		UUID uuid = null;
+		String sql = "SELECT uuid FROM users WHERE username = ?";
+		
+		try {
+			uuidStr = template.query(sql, new Object[]{username}, rse);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		uuid = UUID.fromString(uuidStr);
+		
+		if(uuid == null) {
+			return null;
+		} else {
+			return uuid;
+		}
 	}
 
 	@Override

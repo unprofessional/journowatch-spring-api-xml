@@ -1,5 +1,7 @@
 package com.devcru.journowatch.api.dao;
 
+import java.util.UUID;
+
 import com.devcru.journowatch.api.objects.User;
 
 /**
@@ -15,6 +17,8 @@ public interface UserDao {
 	public void updateUser(User user);
 	
 	public void deleteUser(User user);
+	
+	public UUID getUuid(String username);
 
     public void login();
     public void rateVenue();
