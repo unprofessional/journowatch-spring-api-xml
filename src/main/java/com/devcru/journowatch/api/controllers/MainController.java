@@ -76,9 +76,9 @@ public class MainController {
 		User user = new User();
 		user.setUsername(username);
 		
-		//user = userDao.getUserByUsername(user);
+		user = userDao.getUserByUsername(user);
 		
-		user.setUuid(userDao.getUuid(username));
+		//user.setUuid(userDao.getUuid(username));
 		
 		return user;
 	}

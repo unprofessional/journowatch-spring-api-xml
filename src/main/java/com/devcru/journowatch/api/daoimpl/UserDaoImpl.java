@@ -112,7 +112,7 @@ public class UserDaoImpl implements UserDao {
 		String username = user.getUsername();
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{username}, rse);
+			rows = template.queryForList(sql, new Object[]{username});
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
