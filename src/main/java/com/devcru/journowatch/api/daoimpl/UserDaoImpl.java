@@ -107,12 +107,12 @@ public class UserDaoImpl implements UserDao {
 		
 		//boolean isSuccess = false;
 		String sql = "SELECT username, email, firstname, lastname FROM users WHERE username = ?";
-		List<Map<String, Object>> rows = null;
+		List<Map> rows = null;
 		
 		String username = user.getUsername();
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{username}, rse);
+			rows = (List<Map>) template.queryForMap(sql, new Object[]{username}, rse);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -122,7 +122,7 @@ public class UserDaoImpl implements UserDao {
 			System.out.println("rows.get(i): " + rows.get(i));
 		}
 		
-		for(Map<String, Object> row : rows) {
+		for(Map row : rows) {
 			user.setUuid((UUID)row.get("uuid"));
 			user.setEmail((String)row.get("email"));
 			user.setUsername((String)row.get("username"));
