@@ -167,7 +167,7 @@ public class UserDaoImpl implements UserDao {
 		String lastname = user.getLastName();
 		
 		try {
-			template.update(sql, new Object[]{email, firstname, lastname, username}, rse);
+			template.update(sql, new Object[]{email, firstname, lastname, username});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -188,7 +188,7 @@ public class UserDaoImpl implements UserDao {
 		String username = user.getUsername();
 		
 		try {
-			template.update(sql, new Object[]{username}, rse);
+			template.update(sql, new Object[]{username});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
