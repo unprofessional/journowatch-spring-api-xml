@@ -107,46 +107,30 @@ public class UserDaoImpl implements UserDao {
 		
 		//boolean isSuccess = false;
 		String sql = "SELECT uuid, username, email, firstname, lastname FROM users WHERE username = ?";
-		
-		String sql2 = "SELECT uuid FROM users WHERE username = ?";
-		
-		String sql3 = "SELECT email FROM users WHERE username = ?";
-		
 		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
 		
-//		try {
-//			rows = template.queryForList(sql, username, rse);
-//		} catch (DataAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		//rows = template.queryForList(sql2, username, rseObject);
-		
-		//rows = template.queryForList(sql3, username, rse);
+		try {
+			rows = template.queryForList(sql, new Object[]{username}, rse);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
 		
 		// Debug
-//		for(int i = 0; i < rows.size(); i++) {
-//			System.out.println("rows.get(i): " + rows.get(i));
-//		}
-//		
-//		for(Map<String, Object> row : rows) {
-//			user.setUuid((UUID)row.get("uuid"));
-//			user.setEmail((String)row.get("email"));
-//			user.setUsername((String)row.get("username"));
-//			user.setFirstName((String)row.get("firstName"));
-//			user.setLastName((String)row.get("lastName"));
-//			user.setRole((String)row.get("role"));
-//			user.setPassword((String) "REDACTED"); // Is this necessary?
-//		}
+		for(int i = 0; i < rows.size(); i++) {
+			System.out.println("rows.get(i): " + rows.get(i));
+		}
 		
-		String email = null;
-		
-		email = template.query(sql3, new Object[]{username}, rse);
-		
-		user.setEmail(email);
+		for(Map<String, Object> row : rows) {
+			user.setUuid((UUID)row.get("uuid"));
+			user.setEmail((String)row.get("email"));
+			user.setUsername((String)row.get("username"));
+			user.setFirstName((String)row.get("firstName"));
+			user.setLastName((String)row.get("lastName"));
+			user.setRole((String)row.get("role"));
+			user.setPassword((String) "REDACTED"); // Is this necessary?
+		}
 		
 		return user;		
 	}
