@@ -103,12 +103,12 @@ public class UserDaoImpl implements UserDao {
 		
 		String username = user.getUsername();
 		
+
 		try {
-			rows = template.queryForList(sql, username, rseUser);
-			//isSuccess = true;
+			rows = template.queryForList(sql, username, rse);
 		} catch (DataAccessException e) {
-			//isSuccess = false;
-			e.printStackTrace();
+			System.out.println("!!!!!!!!!!!!!!!: " + e);
+			//e.printStackTrace();
 		}
 		
 		// Debug
