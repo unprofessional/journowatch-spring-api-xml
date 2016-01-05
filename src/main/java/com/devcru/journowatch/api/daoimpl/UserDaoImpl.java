@@ -159,7 +159,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean updateUser(User user) {
 		boolean isSuccess = false;
-		String sql = "UPDATE user SET email = ?, firstname = ?, lastname = ?, WHERE username = ?";
+		String sql = "UPDATE users SET email = ?, firstname = ?, lastname = ?, WHERE username = ?";
 		
 		String username = user.getUsername();
 		String email = user.getEmail();
