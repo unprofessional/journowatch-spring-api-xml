@@ -9,13 +9,14 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import static org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString;
 
@@ -82,12 +83,46 @@ public class MainController {
 		
 		return user;
 	}
-
+	
+	@RequestMapping(value = "/user/{username}", method=RequestMethod.PUT)
+	@ResponseBody
+	public void updateUser(@PathVariable("username") String username) {
+		User user = new User();
+		user.setUsername(username);
+		
+		userDao.updateUser(user);
+		
+		// ???: return JsonResponse;
+	}
+	
+	@RequestMapping(value = "/user/{username}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public void deleteUser(@PathVariable("username") String username) {
+		User user = new User();
+		user.setUsername(username);
+		
+		userDao.deleteUser(user);
+		
+		// ??? return JsonResponse;
+	}
+    
+    @ResponseStatus(value=HttpStatus.OK)
+    // TODO: Test this to see if this gets sent along with a successful 200 OK
+    public String okay() {
+    	System.out.println(">>>>>>>>>>>>>>>: OKAY!");
+    	return "HPOASGBJHSJHDFGGJHSD";
+    }
+    
+    @ResponseStatus(value=HttpStatus.NOT_FOUND)
+    public String notFound() {
+    	System.out.println(">>>>>>>>>>>>>>>: NOT FOUND!");
+    	return "Yotsuba!!";    	
+    }
+    
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public static Object logTheFuckIn(User user) {
 
         // This is where we would call in a UserDAOImpl and execute the login method
-
         return null;
     }
 

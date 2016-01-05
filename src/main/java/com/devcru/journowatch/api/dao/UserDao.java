@@ -14,10 +14,11 @@ public interface UserDao {
 	
 	public User getUserByUsername(User user); // Change this to getUser() that can check for UUID and email, too
 	
-	public void updateUser(User user);
+	public boolean updateUser(User user);
 	
-	public void deleteUser(User user);
+	public boolean deleteUser(User user);
 	
+	// Utility methods
 	public UUID getUuid(String username);
 
     public void login();

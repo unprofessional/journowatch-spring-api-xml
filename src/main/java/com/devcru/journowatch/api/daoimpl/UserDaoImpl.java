@@ -157,15 +157,45 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
+	public boolean updateUser(User user) {
+		boolean isSuccess = false;
+		String sql = "UPDATE user SET email = ?, firstname = ?, lastname = ?, WHERE username = ?";
 		
+		String username = user.getUsername();
+		String email = user.getEmail();
+		String firstname = user.getFirstName();
+		String lastname = user.getLastName();
+		
+		try {
+			template.update(sql, new Object[]{email, firstname, lastname, username}, rse);
+			isSuccess = true;
+		} catch (DataAccessException e) {
+			isSuccess = false;
+			e.printStackTrace();
+		}
+		
+		return isSuccess;
 	}
 
 	@Override
-	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
+	public boolean deleteUser(User user) {
+		boolean isSuccess = false;
+		String sql = "DELETE FROM users WHERE username = ?";
 		
+		// Delete completed tasks, returning full details of the deleted rows:
+		// DELETE FROM tasks WHERE status = 'DONE' RETURNING *;
+		
+		String username = user.getUsername();
+		
+		try {
+			template.update(sql, new Object[]{username}, rse);
+			isSuccess = true;
+		} catch (DataAccessException e) {
+			isSuccess = false;
+			e.printStackTrace();
+		}
+		
+		return isSuccess;
 	}
 
 }
