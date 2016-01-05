@@ -42,9 +42,9 @@
 <!-- 	</bean> -->
 
 	<context:property-placeholder />
-<!-- 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" -->
-<!-- 		id="dataSource"> -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSource">
+<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
 		<property name="driverClassName" value="org.postgresql.Driver" />
         <property name="username" value="${OPENSHIFT_POSTGRESQL_DB_USERNAME}" />
         <property name="password" value="${OPENSHIFT_POSTGRESQL_DB_PASSWORD}" />
