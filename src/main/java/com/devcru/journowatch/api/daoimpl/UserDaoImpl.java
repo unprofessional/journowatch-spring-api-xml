@@ -90,13 +90,13 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByUsername(User user) {
 		
 		//boolean isSuccess = false;
-		String sql = "SELECT * FROM users WHERE username = ?";
+		String sql = "SELECT uuid, username, email, firstname, lastname FROM users WHERE username = ?";
 		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
 		
 		try {
-			rows = template.queryForList(sql, "username", rse);
+			rows = template.queryForList(sql, new Object[]{username}, rse);
 			//isSuccess = true;
 		} catch (DataAccessException e) {
 			//isSuccess = false;
