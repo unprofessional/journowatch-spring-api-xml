@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
-	@JsonProperty("Uuid")
+	@JsonProperty("uuid")
 	private UUID uuid = null;
 	@JsonProperty("username")
 	private String username = null;
