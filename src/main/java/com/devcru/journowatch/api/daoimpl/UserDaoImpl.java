@@ -125,22 +125,28 @@ public class UserDaoImpl implements UserDao {
 		
 		//rows = template.queryForList(sql2, username, rseObject);
 		
-		rows = template.queryForList(sql3, username, rse);
+		//rows = template.queryForList(sql3, username, rse);
 		
 		// Debug
-		for(int i = 0; i < rows.size(); i++) {
-			System.out.println("rows.get(i): " + rows.get(i));
-		}
+//		for(int i = 0; i < rows.size(); i++) {
+//			System.out.println("rows.get(i): " + rows.get(i));
+//		}
+//		
+//		for(Map<String, Object> row : rows) {
+//			user.setUuid((UUID)row.get("uuid"));
+//			user.setEmail((String)row.get("email"));
+//			user.setUsername((String)row.get("username"));
+//			user.setFirstName((String)row.get("firstName"));
+//			user.setLastName((String)row.get("lastName"));
+//			user.setRole((String)row.get("role"));
+//			user.setPassword((String) "REDACTED"); // Is this necessary?
+//		}
 		
-		for(Map<String, Object> row : rows) {
-			user.setUuid((UUID)row.get("uuid"));
-			user.setEmail((String)row.get("email"));
-			user.setUsername((String)row.get("username"));
-			user.setFirstName((String)row.get("firstName"));
-			user.setLastName((String)row.get("lastName"));
-			user.setRole((String)row.get("role"));
-			user.setPassword((String) "REDACTED"); // Is this necessary?
-		}
+		String email = null;
+		
+		email = template.query(sql3, new Object[]{username}, rse);
+		
+		user.setEmail(email);
 		
 		return user;		
 	}
