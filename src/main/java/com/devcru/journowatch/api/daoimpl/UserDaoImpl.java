@@ -106,7 +106,7 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByUsername(User user) {
 		
 		//boolean isSuccess = false;
-		String sql = "SELECT uuid, username, email, firstname, lastname FROM users WHERE username = ?";
+		String sql = "SELECT username, email, firstname, lastname FROM users WHERE username = ?";
 		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
