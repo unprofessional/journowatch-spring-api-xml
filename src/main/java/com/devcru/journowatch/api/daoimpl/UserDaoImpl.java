@@ -104,7 +104,7 @@ public class UserDaoImpl implements UserDao {
 		String username = user.getUsername();
 		
 		try {
-			rows = template.queryForList(sql, username, rse);
+			rows = template.queryForList(sql, username, rseUser);
 			//isSuccess = true;
 		} catch (DataAccessException e) {
 			//isSuccess = false;
