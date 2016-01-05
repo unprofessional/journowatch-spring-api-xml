@@ -40,7 +40,15 @@ public class UserDaoImpl implements UserDao {
 
 	// To be used for all query() calls since they allow for possible null returns
 	// whereas queryForWhatever() does not
-	ResultSetExtractor<Object> rse = new ResultSetExtractor<Object>() {
+	ResultSetExtractor<String> rse = new ResultSetExtractor<String>() {
+		@Override
+		public String extractData(ResultSet rs) throws SQLException,
+				DataAccessException {
+			return (rs.next() ? rs.getString(1) : null);
+		}
+	};
+	
+	ResultSetExtractor<Object> rseObject = new ResultSetExtractor<Object>() {
 		@Override
 		public Object extractData(ResultSet rs) throws SQLException,
 				DataAccessException {
