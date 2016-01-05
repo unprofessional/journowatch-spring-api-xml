@@ -47,6 +47,14 @@ public class UserDaoImpl implements UserDao {
 			return (rs.next() ? rs.getObject(1) : null);
 		}
 	};
+	
+	ResultSetExtractor<User> rseUser = new ResultSetExtractor<User>() {
+		@Override
+		public User extractData(ResultSet rs) throws SQLException,
+				DataAccessException {
+			return (rs.next() ? (User) rs.getObject(1) : null);
+		}
+	};
 
 	public void login() {
 		template.execute(loginSql);
