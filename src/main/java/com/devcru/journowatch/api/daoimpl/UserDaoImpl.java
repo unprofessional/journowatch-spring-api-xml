@@ -110,6 +110,8 @@ public class UserDaoImpl implements UserDao {
 		
 		String sql2 = "SELECT uuid FROM users WHERE username = ?";
 		
+		String sql3 = "SELECT email FROM users WHERE username = ?";
+		
 		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
@@ -121,7 +123,9 @@ public class UserDaoImpl implements UserDao {
 //			e.printStackTrace();
 //		}
 		
-		rows = template.queryForList(sql2, username, rseObject);
+		//rows = template.queryForList(sql2, username, rseObject);
+		
+		rows = template.queryForList(sql3, username, rse);
 		
 		// Debug
 		for(int i = 0; i < rows.size(); i++) {
