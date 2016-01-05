@@ -106,7 +106,7 @@ public class UserDaoImpl implements UserDao {
 	public User getUserByUsername(User user) {
 		
 		//boolean isSuccess = false;
-		String sql = "SELECT username, email, firstname, lastname FROM users WHERE username = ?";
+		String sql = "SELECT uuid, username, email, firstname, lastname, role FROM users WHERE username = ?";
 		List<Map<String, Object>> rows = null;
 		
 		String username = user.getUsername();
@@ -124,10 +124,10 @@ public class UserDaoImpl implements UserDao {
 		
 		for(Map<String, Object> row : rows) {
 			user.setUuid((UUID)row.get("uuid"));
-			user.setEmail((String)row.get("email"));
 			user.setUsername((String)row.get("username"));
-			user.setFirstName((String)row.get("firstName"));
-			user.setLastName((String)row.get("lastName"));
+			user.setEmail((String)row.get("email"));
+			user.setFirstName((String)row.get("firstname"));
+			user.setLastName((String)row.get("lastname"));
 			user.setRole((String)row.get("role"));
 			user.setPassword((String) "REDACTED"); // Is this necessary?
 		}
