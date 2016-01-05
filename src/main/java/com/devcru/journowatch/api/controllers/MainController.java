@@ -86,23 +86,25 @@ public class MainController {
 	
 	@RequestMapping(value = "/user/{username}", method=RequestMethod.PUT)
 	@ResponseBody
-	public void updateUser(@PathVariable("username") String username) {
+	public String updateUser(@PathVariable("username") String username) {
 		User user = new User();
 		user.setUsername(username);
 		
-		userDao.updateUser(user);
+		boolean status = userDao.updateUser(user);
 		
+		return status + "";
 		// ???: return JsonResponse;
 	}
 	
 	@RequestMapping(value = "/user/{username}", method=RequestMethod.DELETE)
 	@ResponseBody
-	public void deleteUser(@PathVariable("username") String username) {
+	public String deleteUser(@PathVariable("username") String username) {
 		User user = new User();
 		user.setUsername(username);
 		
-		userDao.deleteUser(user);
+		boolean status = userDao.deleteUser(user);
 		
+		return status + "";
 		// ??? return JsonResponse;
 	}
     
