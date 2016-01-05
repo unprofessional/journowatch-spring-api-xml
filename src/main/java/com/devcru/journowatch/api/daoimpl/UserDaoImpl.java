@@ -110,7 +110,7 @@ public class UserDaoImpl implements UserDao {
 			user.setFirstName((String)row.get("firstName"));
 			user.setLastName((String)row.get("lastName"));
 			user.setRole((String)row.get("role"));
-			user.setPassword(null); // Is this necessary?
+			user.setPassword((String) "REDACTED"); // Is this necessary?
 		}
 		
 		return user;		
