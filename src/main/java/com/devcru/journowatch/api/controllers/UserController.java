@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 
 @Controller
-@RequestMapping(value = "/user/**")
+@RequestMapping(value = "/users/*")
 public class UserController {
 
 	@Autowired
@@ -63,7 +63,7 @@ public class UserController {
 		return status + "";
 	}
 	
-	@RequestMapping(value="{username}", method=RequestMethod.GET)
+	@RequestMapping(value="/{username}", method=RequestMethod.GET)
 	@ResponseBody
 	public User createUser(@PathVariable("username") String username) {
 		
@@ -77,7 +77,7 @@ public class UserController {
 		return user;
 	}
 	
-	@RequestMapping(value = "{username}", method=RequestMethod.PUT)
+	@RequestMapping(value = "/{username}", method=RequestMethod.PUT)
 	@ResponseBody
 	public String updateUser(@PathVariable("username") String username, @RequestBody User user) {
 		
@@ -91,7 +91,7 @@ public class UserController {
 		// ???: return JsonResponse;
 	}
 	
-	@RequestMapping(value = "{username}", method=RequestMethod.DELETE)
+	@RequestMapping(value = "/{username}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public String deleteUser(@PathVariable("username") String username) {
 		User user = new User();
