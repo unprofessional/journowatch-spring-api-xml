@@ -118,9 +118,9 @@ public class UserDaoImpl implements UserDao {
 		}
 		
 		// Debug
-		for(int i = 0; i < rows.size(); i++) {
-			System.out.println("rows.get(i): " + rows.get(i));
-		}
+//		for(int i = 0; i < rows.size(); i++) {
+//			System.out.println("rows.get(i): " + rows.get(i));
+//		}
 		
 		for(Map<String, Object> row : rows) {
 			user.setUuid((UUID)row.get("uuid"));

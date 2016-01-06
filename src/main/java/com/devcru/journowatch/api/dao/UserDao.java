@@ -21,6 +21,7 @@ public interface UserDao {
 	// Utility methods
 	public UUID getUuid(String username);
 
+	// Maybe methods?
     public void login();
     public void rateVenue();
     public void rateJourno();
