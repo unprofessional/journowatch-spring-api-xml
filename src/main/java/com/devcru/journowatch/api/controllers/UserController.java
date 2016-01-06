@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 
 @Controller
-@RequestMapping(value = "/user/*")
+@RequestMapping(value = "/user/**")
 public class UserController {
 
 	@Autowired
@@ -42,7 +42,7 @@ public class UserController {
 	 * Note that this is not REST by any means
 	 * This is a full-fledged MVC application
 	 */
-	@RequestMapping(value="test", method=RequestMethod.GET)
+	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public @ResponseBody
 	String getIndexView() throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
 		System.out.println("MainController > test hit! Returning data...");
