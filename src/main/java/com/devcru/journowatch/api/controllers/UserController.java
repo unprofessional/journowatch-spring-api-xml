@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 
 @Controller
-@RequestMapping(value = "/user/*")
+@RequestMapping(value = "/user")
 public class UserController {
 
 	@Autowired
