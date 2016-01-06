@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/user/*")
 public class UserController {
 
 	@Autowired
@@ -42,7 +42,7 @@ public class UserController {
 	 * Note that this is not REST by any means
 	 * This is a full-fledged MVC application
 	 */
-	@RequestMapping(value="/test", method=RequestMethod.GET)
+	@RequestMapping(value="test", method=RequestMethod.GET)
 	public @ResponseBody
 	String getIndexView() throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
 		System.out.println("MainController > test hit! Returning data...");
@@ -54,7 +54,7 @@ public class UserController {
 		return processTemplateIntoString(freemarkerConfiguration.getTemplate("sample.ftl"), new Object());
 	}
 	
-	@RequestMapping(value="/user", method=RequestMethod.POST)
+	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
 	public String createUser(@RequestBody User user) {
 		
@@ -63,7 +63,7 @@ public class UserController {
 		return status + "";
 	}
 	
-	@RequestMapping(value="/user/{username}", method=RequestMethod.GET)
+	@RequestMapping(value="{username}", method=RequestMethod.GET)
 	@ResponseBody
 	public User createUser(@PathVariable("username") String username) {
 		
@@ -77,7 +77,7 @@ public class UserController {
 		return user;
 	}
 	
-	@RequestMapping(value = "/user/{username}", method=RequestMethod.PUT)
+	@RequestMapping(value = "{username}", method=RequestMethod.PUT)
 	@ResponseBody
 	public String updateUser(@PathVariable("username") String username, @RequestBody User user) {
 		
@@ -91,7 +91,7 @@ public class UserController {
 		// ???: return JsonResponse;
 	}
 	
-	@RequestMapping(value = "/user/{username}", method=RequestMethod.DELETE)
+	@RequestMapping(value = "{username}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public String deleteUser(@PathVariable("username") String username) {
 		User user = new User();
@@ -116,7 +116,7 @@ public class UserController {
     	return "Yotsuba!!";    	
     }
     
-    @RequestMapping(value="/login", method=RequestMethod.POST)
+    @RequestMapping(value="login", method=RequestMethod.POST)
     public static Object logTheFuckIn(User user) {
 
         // This is where we would call in a UserDAOImpl and execute the login method
