@@ -86,9 +86,9 @@ public class MainController {
 	
 	@RequestMapping(value = "/user/{username}", method=RequestMethod.PUT)
 	@ResponseBody
-	public String updateUser(@PathVariable("username") String username) {
-		User user = new User();
-		user.setUsername(username);
+	public String updateUser(@PathVariable("username") String username, @RequestBody User user) {
+		
+		//user.setUsername(username);
 		
 		boolean status = userDao.updateUser(user);
 		
