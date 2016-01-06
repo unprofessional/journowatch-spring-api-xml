@@ -35,7 +35,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="journDao" class="com.devcru.journowatch.api.daoimpl.JournoDaoImpl">
+	<bean id="journoDao" class="com.devcru.journowatch.api.daoimpl.JournoDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
