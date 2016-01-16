@@ -1,55 +1,74 @@
 package com.devcru.journowatch.api.objects;
 
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Monitored on 12/27/2015. Journo model class (POJO)
  */
 
 public class Journo {
 
-	private static String name;
-	private static String[] publications;
-	private static String status; // enum?
-	private static String bio;
-	private static int rating; // (0-100 scale)
+	@JsonProperty("uuid")
+	private UUID uuid = null;
+	@JsonProperty("name")
+	private String name = null;
+	@JsonProperty("publications")
+	private String[] publications = null; // UUID[]?
+	@JsonProperty("status")
+	private String status = null; // enum?
+	@JsonProperty("bio")
+	private String bio = null;
+	@JsonProperty("overallrating")
+	private int overallRating = -1; // (0-100 scale)
 
-	public static String getName() {
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+	public String getName() {
 		return name;
 	}
 
-	public static void setName(String name) {
-		Journo.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public static String[] getPublications() {
+	public String[] getPublications() {
 		return publications;
 	}
 
-	public static void setPublications(String[] publications) {
-		Journo.publications = publications;
+	public void setPublications(String[] publications) {
+		this.publications = publications;
 	}
 
-	public static String getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public static void setStatus(String status) {
-		Journo.status = status;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public static String getBio() {
+	public String getBio() {
 		return bio;
 	}
 
-	public static void setBio(String bio) {
-		Journo.bio = bio;
+	public void setBio(String bio) {
+		this.bio = bio;
 	}
 
-	public static int getRating() {
-		return rating;
+	public int getOverallRating() {
+		return overallRating;
 	}
 
-	public static void setRating(int rating) {
-		Journo.rating = rating;
+	public void setOverallRating(int overallRating) {
+		this.overallRating = overallRating;
 	}
 
 }

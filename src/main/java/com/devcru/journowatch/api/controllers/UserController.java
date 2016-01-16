@@ -1,7 +1,8 @@
 package com.devcru.journowatch.api.controllers;
 
-import com.devcru.journowatch.api.daoimpl.UserDaoImpl;
 import com.devcru.journowatch.api.objects.User;
+import com.devcru.journowatch.api.services.UserService;
+
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
@@ -30,9 +31,8 @@ import java.io.IOException;
 @Controller
 @RequestMapping(value = "/user/*")
 public class UserController {
-
-	@Autowired
-    private UserDaoImpl userDao;
+	
+	private UserService userServ;
 	
 	@Autowired
 	private Configuration freemarkerConfiguration;
@@ -57,9 +57,7 @@ public class UserController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
 	public String createUser(@RequestBody User user) {
-		
-		boolean status = userDao.addUser(user);
-		
+		boolean status = userServ.createUser(user);
 		return status + "";
 	}
 	
@@ -70,7 +68,7 @@ public class UserController {
 		User user = new User();
 		user.setUsername(username);
 		
-		user = userDao.getUserByUsername(user);
+		user = userServ.getUser(user);
 		
 		//user.setUuid(userDao.getUuid(username));
 		
@@ -80,13 +78,10 @@ public class UserController {
 	@RequestMapping(value = "/{username}", method=RequestMethod.PUT)
 	@ResponseBody
 	public String updateUser(@PathVariable("username") String username, @RequestBody User user) {
-		
 		// Should we first associate the username with the JSON struct?
 		// i.e. is there a data integrity risk here?  Analyze further...
 		//user.setUsername(username);
-		
-		boolean status = userDao.updateUser(user);
-		
+		boolean status = userServ.updateUser(user);
 		return status + "";
 		// ???: return JsonResponse;
 	}
@@ -97,8 +92,7 @@ public class UserController {
 		User user = new User();
 		user.setUsername(username);
 		
-		boolean status = userDao.deleteUser(user);
-		
+		boolean status = userServ.deleteUser(user);
 		return status + "";
 		// ??? return JsonResponse;
 	}
@@ -118,8 +112,7 @@ public class UserController {
     
     @RequestMapping(value="login", method=RequestMethod.POST)
     public static Object logTheFuckIn(User user) {
-
-        // This is where we would call in a UserDAOImpl and execute the login method
+    	// TODO: boolean status = userServ.logTheFuckIn(user);
         return null;
     }
 
