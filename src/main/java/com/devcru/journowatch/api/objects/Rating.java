@@ -17,8 +17,8 @@ public class Rating {
 	private UUID owner; // UUID of the user who owns this rating
 	@JsonProperty("journouuid")
 	private UUID journo; // UUID of the journo for whom this applies
-	@JsonProperty("rating")
-	private int rating; // (1-100?)
+	@JsonProperty("score")
+	private int score; // (1-100?)
 	@JsonProperty("comment")
 	private String comment;
 
@@ -54,12 +54,12 @@ public class Rating {
 		this.journo = journo;
 	}
 
-	public int getRating() {
-		return rating;
+	public int getScore() {
+		return score;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setScore(int score) {
+		this.score = score;
 	}
 
 	public String getComment() {

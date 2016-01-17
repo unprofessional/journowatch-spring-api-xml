@@ -22,13 +22,7 @@ import javax.sql.DataSource;
  */
 
 public class UserDaoImpl implements UserDao {
-
-	// Use LOCAL SCOPE later
-
-	private String loginSql = "";
-	private String rateVenueSql = "";
-	private String rateJourno = "";
-
+	
 	protected JdbcTemplate template;
 
 	@Autowired
@@ -36,7 +30,6 @@ public class UserDaoImpl implements UserDao {
 	public void setDataSource(DataSource ds) {
 		this.template = new JdbcTemplate(ds);
 	}
-	
 
 	// To be used for all query() calls since they allow for possible null returns
 	// whereas queryForWhatever() does not
@@ -65,14 +58,17 @@ public class UserDaoImpl implements UserDao {
 	};
 
 	public void login() {
+		String loginSql = "";
 		template.execute(loginSql);
 	}
 
 	public void rateVenue() {
+		String rateVenueSql = "";
 		template.execute(rateVenueSql);
 	}
 
 	public void rateJourno() {
+		String rateJourno = "";
 		template.execute(rateJourno);
 	}
 	
@@ -104,6 +100,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserByUsername(User user) {
+		
+		// TODO: Go ahead and make this a catch-all method (uuid, username, email)
 		
 		//boolean isSuccess = false;
 		String sql = "SELECT uuid, username, email, firstname, lastname, role FROM users WHERE username = ?";
@@ -194,6 +192,14 @@ public class UserDaoImpl implements UserDao {
 			isSuccess = false;
 			e.printStackTrace();
 		}
+		
+		return isSuccess;
+	}
+	
+	public boolean verifyCredentials(User user) {
+		boolean isSuccess = false;
+		
+		String sql = "";
 		
 		return isSuccess;
 	}

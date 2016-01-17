@@ -20,8 +20,8 @@ public class Journo {
 	private String status = null; // enum?
 	@JsonProperty("bio")
 	private String bio = null;
-	@JsonProperty("overallrating")
-	private int overallRating = -1; // (0-100 scale)
+	@JsonProperty("overallscore")
+	private int overallScore = -1; // (0-100 scale)
 
 	public UUID getUuid() {
 		return uuid;
@@ -63,12 +63,12 @@ public class Journo {
 		this.bio = bio;
 	}
 
-	public int getOverallRating() {
-		return overallRating;
+	public int getOverallScore() {
+		return overallScore;
 	}
 
-	public void setOverallRating(int overallRating) {
-		this.overallRating = overallRating;
+	public void setOverallScore(int overallScore) {
+		this.overallScore = overallScore;
 	}
 
 }

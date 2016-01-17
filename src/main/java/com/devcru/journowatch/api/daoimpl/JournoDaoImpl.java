@@ -43,7 +43,7 @@ public class JournoDaoImpl implements JournoDao {
 		
 		String name = journo.getName();
 		String[] publications = journo.getPublications();
-		int overallRating = journo.getOverallRating();
+		int overallRating = journo.getOverallScore();
 		String status = journo.getStatus();
 		String bio = journo.getBio();
 		
@@ -81,7 +81,7 @@ public class JournoDaoImpl implements JournoDao {
 		for(Map<String, Object> row : rows) {
 			journo.setName((String)row.get("name"));
 			journo.setPublications((String[])row.get("publications"));
-			journo.setOverallRating((int)row.get("overallrating"));
+			journo.setOverallScore((int)row.get("overallscore"));
 			journo.setStatus((String)row.get("status"));
 			journo.setBio((String)row.get("bio"));
 		}

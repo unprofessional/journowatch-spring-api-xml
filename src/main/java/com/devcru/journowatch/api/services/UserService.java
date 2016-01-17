@@ -19,6 +19,10 @@ public class UserService {
 	@Autowired
 	private static UserDaoImpl ud;
 	
+	/*
+	 * CRUD stuff
+	 */
+	
 	public boolean createUser(User user) {
 		boolean status = ud.addUser(user);
 		return status;
@@ -39,5 +43,34 @@ public class UserService {
 		boolean status = ud.deleteUser(user);
 		return status;
 	}
+	
+	/*
+	 * Supporting business-logic stuff
+	 */
 
+	// TODO: isSelf()??? (this maintains state)
+	public boolean doSomething() {
+		return false;
+	}
+	
+	/* TODO: Apply rules with isSelf()???
+	 * if(isSelf()) { updateUser(); } else // do nothing
+	 * 
+	 * TODO: User operations
+	 * public static void verifyCredentials(User user) { //... }
+	 * 
+	 * public static void submitRating(User user, Rating rating, Journo journo) { //... }
+	 * 
+	 * public static void doSomethingElse() {}
+	 * 
+	 */
+	
+	public static boolean verifyCredentials(User user) {
+		boolean isSuccess = false;
+		
+		// isSuccess = userServ.verifyCredentials(user);
+		
+		return isSuccess;
+	}
+	
 }
