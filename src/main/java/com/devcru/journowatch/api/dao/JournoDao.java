@@ -4,7 +4,7 @@ import com.devcru.journowatch.api.objects.Journo;
 
 public interface JournoDao {
 	
-	public boolean addJourno(Journo journo);
+	public boolean createJourno(Journo journo);
 	
 	public Journo getJourno(Journo journo);
 	

@@ -36,7 +36,7 @@ public class RatingDaoImpl implements RatingDao {
 	};
 
 	@Override
-	public boolean addRating(Rating rating) {
+	public boolean createRating(Rating rating) {
 		boolean isSuccess = false;
 
 		String sql = "INSERT INTO ratings (timestamp, owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?, ?) ";

@@ -24,7 +24,7 @@ public class UserService {
 	 */
 	
 	public boolean createUser(User user) {
-		boolean status = ud.addUser(user);
+		boolean status = ud.createUser(user);
 		return status;
 	}
 	

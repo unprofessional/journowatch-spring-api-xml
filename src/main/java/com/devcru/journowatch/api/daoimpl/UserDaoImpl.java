@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
 	/* CRUD Operations */
 
 	@Override
-	public boolean addUser(User user) {
+	public boolean createUser(User user) {
 		boolean isSuccess = false;
 		String sql = "INSERT INTO users (username, email, firstname, lastname, role, password) VALUES (?, ?, ?, ?, ?, ?)";
 		

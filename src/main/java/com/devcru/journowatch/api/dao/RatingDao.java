@@ -4,7 +4,7 @@ import com.devcru.journowatch.api.objects.Rating;
 
 public interface RatingDao {
 	
-	public boolean addRating(Rating rating);
+	public boolean createRating(Rating rating);
 	
 	public Rating getRating(Rating rating);
 	

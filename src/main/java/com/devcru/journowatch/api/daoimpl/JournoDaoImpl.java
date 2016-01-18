@@ -37,7 +37,7 @@ public class JournoDaoImpl implements JournoDao {
 	};
 
 	@Override
-	public boolean addJourno(Journo journo) {
+	public boolean createJourno(Journo journo) {
 		boolean isSuccess = false;
 		String sql = "INSERT INTO journos (column, column) VALUES (?, ?)";
 		

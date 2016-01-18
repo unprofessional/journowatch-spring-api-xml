@@ -10,7 +10,7 @@ import com.devcru.journowatch.api.objects.User;
 
 public interface UserDao {
 	
-	public boolean addUser(User user);
+	public boolean createUser(User user);
 	
 	public User getUserByUsername(User user); // Change this to getUser() that can check for UUID and email, too
 	
