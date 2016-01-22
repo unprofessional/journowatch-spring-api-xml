@@ -17,7 +17,7 @@ import com.devcru.journowatch.api.objects.User;
 public class UserService {
 	
 	@Autowired
-	private static UserDaoImpl ud;
+	private UserDaoImpl ud;
 	
 	/*
 	 * CRUD stuff
