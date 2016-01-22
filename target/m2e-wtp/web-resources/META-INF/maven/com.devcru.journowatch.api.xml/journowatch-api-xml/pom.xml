@@ -85,6 +85,19 @@
 			<artifactId>jackson-core</artifactId>
 			<version>2.6.0</version>
 		</dependency>
+		
+		<!-- Utils for CORS filter declared in web.xml -->
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>cors-filter</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>java-property-utils</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 
 		<!-- JDBC postgresql driver: Can still use this with a 9.2 instance -->
 		<dependency>
