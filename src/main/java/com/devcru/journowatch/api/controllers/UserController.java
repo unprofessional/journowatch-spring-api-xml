@@ -32,6 +32,7 @@ import java.io.IOException;
 @RequestMapping(value = "/user/*")
 public class UserController {
 	
+	@Autowired
 	private UserService userServ;
 	
 	@Autowired
