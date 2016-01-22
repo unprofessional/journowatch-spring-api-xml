@@ -40,6 +40,9 @@ public class UserService {
 		System.out.println("US > password: " + password);
 		
 		boolean status = ud.createUser(user);
+		
+		System.out.println("US > status: " + status);
+		
 		return status;
 	}
 	

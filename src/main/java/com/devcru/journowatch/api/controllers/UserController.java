@@ -73,6 +73,9 @@ public class UserController {
 		System.out.println("UC > password: " + password);
 		
 		boolean status = userServ.createUser(user);
+		
+		System.out.println("UC > status: " + status);
+		
 		return status + "";
 	}
 	
