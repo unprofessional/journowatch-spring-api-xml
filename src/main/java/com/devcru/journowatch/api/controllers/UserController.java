@@ -57,6 +57,21 @@ public class UserController {
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
 	public String createUser(@RequestBody User user) {
+		
+		String username = user.getUsername();
+		String email = user.getEmail();
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		String role = user.getRole();
+		String password = user.getPassword();
+		
+		System.out.println("UC > username: " + username);
+		System.out.println("UC > email: " + email);
+		System.out.println("UC > firstName: " + firstName);
+		System.out.println("UC > lastName: " + lastName);
+		System.out.println("UC > role: " + role);
+		System.out.println("UC > password: " + password);
+		
 		boolean status = userServ.createUser(user);
 		return status + "";
 	}

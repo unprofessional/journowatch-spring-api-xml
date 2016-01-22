@@ -24,6 +24,21 @@ public class UserService {
 	 */
 	
 	public boolean createUser(User user) {
+		
+		String username = user.getUsername();
+		String email = user.getEmail();
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		String role = user.getRole();
+		String password = user.getPassword();
+		
+		System.out.println("US > username: " + username);
+		System.out.println("US > email: " + email);
+		System.out.println("US > firstName: " + firstName);
+		System.out.println("US > lastName: " + lastName);
+		System.out.println("US > role: " + role);
+		System.out.println("US > password: " + password);
+		
 		boolean status = ud.createUser(user);
 		return status;
 	}
