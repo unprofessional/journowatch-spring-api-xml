@@ -87,7 +87,7 @@ public class UserDaoImpl implements UserDao {
 		String password = user.getPassword();
 		
 		try {
-			template.update(sql, username, email, firstName, lastName, role, password);
+			template.update(sql, new Object[]{username, email, firstName, lastName, role, password});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
