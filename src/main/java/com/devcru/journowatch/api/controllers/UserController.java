@@ -58,6 +58,7 @@ public class UserController {
 		return processTemplateIntoString(freemarkerConfiguration.getTemplate("sample.ftl"), new Object());
 	}
 	
+	@CrossOrigin(origins = "http://" + Constants.BASEURL_OPENSHIFT)
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
 	public String createUser(@RequestBody User user) {
@@ -97,6 +98,7 @@ public class UserController {
 		return user;
 	}
 	
+	@CrossOrigin(origins = "http://" + Constants.BASEURL_OPENSHIFT)
 	@RequestMapping(value = "/{username}", method=RequestMethod.PUT)
 	@ResponseBody
 	public String updateUser(@PathVariable("username") String username, @RequestBody User user) {
