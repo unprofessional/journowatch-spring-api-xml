@@ -36,7 +36,7 @@ import java.io.IOException;
 //		"http://journowatchwebclient-sjw.rhcloud.com"},
 //			methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
 //			allowedHeaders = "*") // use https:// when appropriate
-//@RequestMapping(value = "/user/*")
+@RequestMapping(value = "/user/*")
 @CrossOrigin
 public class UserController {
 	
