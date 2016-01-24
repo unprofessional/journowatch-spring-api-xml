@@ -105,6 +105,7 @@ public class UserController {
 	@RequestMapping(value = "/{username}", method=RequestMethod.PUT)
 	@ResponseBody
 	public String updateUser(@PathVariable("username") String username, @RequestBody User user) {
+		System.out.println("PUT user/{username} hit!");
 		// Should we first associate the username with the JSON struct?
 		// i.e. is there a data integrity risk here?  Analyze further...
 		//user.setUsername(username);
