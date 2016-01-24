@@ -32,7 +32,7 @@ import java.io.IOException;
 
 @Controller
 //@CrossOrigin(origins = "http://" + Constants.BASEURL_OPENSHIFT, methods={RequestMethod.PUT, RequestMethod.DELETE}) // use https:// when appropriate
-@CrossOrigin(origins = "http://journowatchapi-sjw.rhcloud.com/**", methods={RequestMethod.PUT, RequestMethod.DELETE}) // use https:// when appropriate
+@CrossOrigin(origins = "http://journowatchwebclient-sjw.rhcloud.com", methods={RequestMethod.PUT, RequestMethod.DELETE}) // use https:// when appropriate
 @RequestMapping(value = "/user/*")
 public class UserController {
 	
