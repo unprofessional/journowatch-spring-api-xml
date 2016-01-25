@@ -42,7 +42,7 @@ import java.io.IOException;
 				RequestMethod.POST,
 				RequestMethod.PUT,
 				RequestMethod.DELETE,
-				RequestMethod.OPTIONS
+				RequestMethod.OPTIONS // for the browser CORS pre-flight
 		},
 		allowedHeaders = "*")
 @RequestMapping(value = "/user/*")
