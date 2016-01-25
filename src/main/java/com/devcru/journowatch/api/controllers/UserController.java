@@ -31,13 +31,20 @@ import java.io.IOException;
  */
 
 @Controller
-//@CrossOrigin(origins = "http://" + Constants.BASEURL_OPENSHIFT, methods={RequestMethod.PUT, RequestMethod.DELETE}) // use https:// when appropriate
-@CrossOrigin(origins = {
-		//"http://journowatchwebclient-sjw.rhcloud.com/admin/portal#/user",
-		"http://journowatchwebclient-sjw.rhcloud.com"
+@CrossOrigin(
+		origins = {
+				// use "https://" when appropriate
+				"http://" + Constants.LOCALHOST8080,
+				"http://" + Constants.OPENSHIFT
 		},
-			methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS},
-			allowedHeaders = "*") // use https:// when appropriate
+		methods = {
+				RequestMethod.GET,
+				RequestMethod.POST,
+				RequestMethod.PUT,
+				RequestMethod.DELETE,
+				RequestMethod.OPTIONS
+		},
+		allowedHeaders = "*")
 //@CrossOrigin
 @RequestMapping(value = "/user/*")
 public class UserController {
