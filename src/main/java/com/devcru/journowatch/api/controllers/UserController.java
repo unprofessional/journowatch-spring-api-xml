@@ -31,7 +31,7 @@ import java.io.IOException;
  */
 
 @Controller
-@CrossOrigin(
+@CrossOrigin( // CORS... it's not just a shitty beer
 		origins = {
 				// use "https://" when appropriate
 				"http://" + Constants.LOCALHOST8080,
@@ -45,7 +45,6 @@ import java.io.IOException;
 				RequestMethod.OPTIONS
 		},
 		allowedHeaders = "*")
-//@CrossOrigin
 @RequestMapping(value = "/user/*")
 public class UserController {
 	
