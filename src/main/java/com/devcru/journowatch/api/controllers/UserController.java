@@ -55,9 +55,10 @@ public class UserController {
 	private Configuration freemarkerConfiguration;
 	
 	/* 
-	 * Sample landing page thing
-	 * Note that this is not REST by any means
-	 * This is a full-fledged MVC application
+	 * TODO:
+	 * We are beginning work on abstracting the REST API out into its own resource layer
+	 * The front-end web-client layer is being developed as a separate project
+	 * Therefore, we can get rid of these FTL references soon
 	 */
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	public @ResponseBody
