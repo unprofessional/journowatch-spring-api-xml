@@ -44,15 +44,13 @@ import java.io.IOException;
 				RequestMethod.DELETE,
 				RequestMethod.OPTIONS // for the browser CORS pre-flight
 		},
-		allowedHeaders = "*")
+		allowedHeaders = "*" // TODO: Find the minimum-required headers necessary instead of allowing all
+)
 @RequestMapping(value = "/user/*")
 public class UserController {
 	
 	@Autowired
 	private UserService userServ;
-	
-	@Autowired
-	private Configuration freemarkerConfiguration;
 	
 	/* 
 	 * TODO:
@@ -60,17 +58,6 @@ public class UserController {
 	 * The front-end web-client layer is being developed as a separate project
 	 * Therefore, we can get rid of these FTL references soon
 	 */
-	@RequestMapping(value="/test", method=RequestMethod.GET)
-	public @ResponseBody
-	String getIndexView() throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
-		System.out.println("MainController > test hit! Returning data...");
-		
-		User user = new User();
-		user.setUsername("regular");
-		user.setPassword("password");
-		
-		return processTemplateIntoString(freemarkerConfiguration.getTemplate("sample.ftl"), new Object());
-	}
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
@@ -82,6 +69,8 @@ public class UserController {
 		String lastName = user.getLastName();
 		String role = user.getRole();
 		String password = user.getPassword();
+		
+		// TODO: Remember to remove this debug sysout crap when we're done with it
 		
 		System.out.println("UC > username: " + username);
 		System.out.println("UC > email: " + email);
@@ -105,8 +94,6 @@ public class UserController {
 		user.setUsername(username);
 		
 		user = userServ.getUser(user);
-		
-		//user.setUuid(userDao.getUuid(username));
 		
 		return user;
 	}
@@ -150,6 +137,8 @@ public class UserController {
     @RequestMapping(value="login", method=RequestMethod.POST)
     public static Object logTheFuckIn(User user) {
     	// TODO: boolean status = userServ.logTheFuckIn(user);
+    	// XXX: Still not sure if this method will be necessary....
+    	// most likely belongs in Service Class if so, anyway
         return null;
     }
 
