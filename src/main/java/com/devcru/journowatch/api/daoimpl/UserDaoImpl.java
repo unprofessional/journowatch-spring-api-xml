@@ -83,7 +83,7 @@ public class UserDaoImpl implements UserDao {
 		String email = user.getEmail();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
-		String role = user.getRole();
+		int role = user.getRole();
 		String password = user.getPassword();
 		
 		System.out.println("username: " + username);
@@ -133,7 +133,7 @@ public class UserDaoImpl implements UserDao {
 			user.setEmail((String)row.get("email"));
 			user.setFirstName((String)row.get("firstname"));
 			user.setLastName((String)row.get("lastname"));
-			user.setRole((String)row.get("role"));
+			user.setRole((int)row.get("role"));
 			user.setPassword((String) "REDACTED"); // Is this necessary?
 		}
 		

@@ -21,7 +21,7 @@ public class User {
 	@JsonProperty("lastname")
 	private String lastName = null;
 	@JsonProperty("role")
-	private String role = null; // Separate into relationship-table later? Use additive permissions ala Linux
+	private int role = 2; // Default 2 for ROLE_USER (1 is ROLE_ADMIN)
 	@JsonProperty("password")
 	private String password = null;
 
@@ -65,11 +65,11 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 

@@ -67,7 +67,7 @@ public class UserController {
 		String email = user.getEmail();
 		String firstName = user.getFirstName();
 		String lastName = user.getLastName();
-		String role = user.getRole();
+		int role = user.getRole();
 		String password = user.getPassword();
 		
 		// TODO: Remember to remove this debug sysout crap when we're done with it
