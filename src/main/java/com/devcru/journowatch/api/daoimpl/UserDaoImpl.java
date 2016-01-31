@@ -172,6 +172,12 @@ public class UserDaoImpl implements UserDao {
 		String lastname = user.getLastName();
 		int role = user.getRole();
 		
+		Object[] attributes = new Object[]{email, firstname, lastname, username, role};
+		for(int i = 0; i < attributes.length; i++) {
+			System.out.println("attributes[i]: " + attributes[i]);
+			System.out.println("attributes[i].getClass(): " + attributes[i].getClass());
+		}
+		
 		try {
 			template.update(sql, new Object[]{email, firstname, lastname, username, role});
 			isSuccess = true;
