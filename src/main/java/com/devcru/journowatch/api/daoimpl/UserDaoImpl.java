@@ -164,15 +164,16 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean updateUser(User user) {
 		boolean isSuccess = false;
-		String sql = "UPDATE users SET email = ?, firstname = ?, lastname = ? WHERE username = ?";
+		String sql = "UPDATE users SET email = ?, firstname = ?, lastname = ?, role = ? WHERE username = ?";
 		
 		String username = user.getUsername();
 		String email = user.getEmail();
 		String firstname = user.getFirstName();
 		String lastname = user.getLastName();
+		int role = user.getRole();
 		
 		try {
-			template.update(sql, new Object[]{email, firstname, lastname, username});
+			template.update(sql, new Object[]{email, firstname, lastname, username, role});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
