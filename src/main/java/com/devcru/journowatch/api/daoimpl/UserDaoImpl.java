@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
 		int role = user.getRole();
 		String password = user.getPassword();
 		
-		Object[] attributes = new Object[]{email, firstName, lastName, username, role};
+		Object[] attributes = new Object[]{email, firstName, lastName, username, role, password};
 		for(int i = 0; i < attributes.length; i++) {
 			System.out.println("attributes[i]: " + attributes[i]);
 			System.out.println("attributes[i].getClass(): " + attributes[i].getClass());
