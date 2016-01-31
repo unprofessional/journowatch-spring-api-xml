@@ -86,15 +86,14 @@ public class UserDaoImpl implements UserDao {
 		int role = user.getRole();
 		String password = user.getPassword();
 		
-		System.out.println("username: " + username);
-		System.out.println("email: " + email);
-		System.out.println("firstName: " + firstName);
-		System.out.println("lastName: " + lastName);
-		System.out.println("role: " + role);
-		System.out.println("password: " + password);
+		Object[] attributes = new Object[]{email, firstName, lastName, username, role};
+		for(int i = 0; i < attributes.length; i++) {
+			System.out.println("attributes[i]: " + attributes[i]);
+			System.out.println("attributes[i].getClass(): " + attributes[i].getClass());
+		}
 		
 		try {
-			template.update(sql, new Object[]{username, email, firstName, lastName, role, password});
+			template.update(sql, attributes);
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -179,7 +178,7 @@ public class UserDaoImpl implements UserDao {
 		}
 		
 		try {
-			template.update(sql, new Object[]{email, firstname, lastname, username, role});
+			template.update(sql, attributes);
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
