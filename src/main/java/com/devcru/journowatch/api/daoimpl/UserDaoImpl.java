@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
 		int role = user.getRole();
 		String password = user.getPassword();
 		
-		Object[] attributes = new Object[]{email, firstName, lastName, username, role, password};
+		Object[] attributes = new Object[]{username, email, firstName, lastName, role, password};
 		for(int i = 0; i < attributes.length; i++) {
 			System.out.println("attributes[i]: " + attributes[i]);
 			System.out.println("attributes[i].getClass(): " + attributes[i].getClass());
@@ -165,13 +165,13 @@ public class UserDaoImpl implements UserDao {
 		boolean isSuccess = false;
 		String sql = "UPDATE users SET email = ?, firstname = ?, lastname = ?, role = ? WHERE username = ?";
 		
-		String username = user.getUsername();
 		String email = user.getEmail();
 		String firstname = user.getFirstName();
 		String lastname = user.getLastName();
 		int role = user.getRole();
+		String username = user.getUsername();
 		
-		Object[] attributes = new Object[]{email, firstname, lastname, username, role};
+		Object[] attributes = new Object[]{email, firstname, lastname, role, username};
 		for(int i = 0; i < attributes.length; i++) {
 			System.out.println("attributes[i]: " + attributes[i]);
 			System.out.println("attributes[i].getClass(): " + attributes[i].getClass());
