@@ -88,7 +88,10 @@ public class UserController {
 	
 	@RequestMapping(value="/{username}", method=RequestMethod.GET)
 	@ResponseBody
-	public User createUser(@PathVariable("username") String username) {
+	public User createUser(@PathVariable("username") String username) throws InterruptedException {
+		
+		// XXX DEBUG: Testing multiple-submit prevention on the client
+		Thread.sleep(5000); // Sleep for 5 ms
 		
 		User user = new User();
 		user.setUsername(username);
