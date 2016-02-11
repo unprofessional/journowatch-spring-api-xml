@@ -9,7 +9,7 @@ CREATE TABLE users
   email character varying(64),
   firstname character varying(64),
   lastname character varying(64),
-  role character varying(16) NOT NULL DEFAULT 'ROLE_USER'::character varying, -- integer???
+  role integer, -- integer???
   password character varying(64) NOT NULL,
   CONSTRAINT users_pkey PRIMARY KEY (uuid)
 )
