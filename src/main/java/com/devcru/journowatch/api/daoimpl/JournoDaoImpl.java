@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.sql.DataSource;
 
@@ -39,16 +40,16 @@ public class JournoDaoImpl implements JournoDao {
 	@Override
 	public boolean createJourno(Journo journo) {
 		boolean isSuccess = false;
-		String sql = "INSERT INTO journos (column, column) VALUES (?, ?)";
+		
+		String sql = "INSERT INTO journos (name, overallrating, status, bio) VALUES (?, ?, ?, ?)";
 		
 		String name = journo.getName();
-		String[] publications = journo.getPublications();
-		int overallRating = journo.getOverallScore();
+		int overallscore = journo.getOverallScore();
 		String status = journo.getStatus();
 		String bio = journo.getBio();
 		
 		try {
-			template.update(sql, new Object[]{name, publications, overallRating, status, bio});
+			template.update(sql, new Object[]{name, overallscore, status, bio});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -62,6 +63,7 @@ public class JournoDaoImpl implements JournoDao {
 	public Journo getJourno(Journo journo) {
 		String sql = "SELECT * FROM journos WHERE name = ?";
 		
+		UUID uuid = journo.getUuid();
 		String name = journo.getName();
 		// TODO: ^^^ Should use UUID... in fact, change the getUser() method in User to fix this
 		
@@ -80,7 +82,6 @@ public class JournoDaoImpl implements JournoDao {
 		
 		for(Map<String, Object> row : rows) {
 			journo.setName((String)row.get("name"));
-			journo.setPublications((String[])row.get("publications"));
 			journo.setOverallScore((int)row.get("overallscore"));
 			journo.setStatus((String)row.get("status"));
 			journo.setBio((String)row.get("bio"));
@@ -92,16 +93,16 @@ public class JournoDaoImpl implements JournoDao {
 	@Override
 	public boolean updateJourno(Journo journo) {
 		boolean isSuccess = false; 
-		String sql = "UPDATE journo (name, publications, status, bio) VALUES (?, ?, ?, ?)";
+		String sql = "UPDATE journo (name, status, bio, overallscore) VALUES (?, ?, ?, ?) WHERE uuid = ?";
 		
+		UUID uuid = journo.getUuid();
 		String name = journo.getName();
-		String publications = null;
-		String status = null;
-		String bio = null;
-		// Update the overallrating via another, dedicated method
+		String status = journo.getStatus();
+		String bio = journo.getBio();
+		int overallscore = journo.getOverallScore();
 		
 		try {
-			template.update(sql, new Object[]{name, publications, status, bio});
+			template.update(sql, new Object[]{name, status, bio, uuid, overallscore});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -113,8 +114,21 @@ public class JournoDaoImpl implements JournoDao {
 
 	@Override
 	public boolean deleteJourno(Journo journo) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean isSuccess = false;
+		
+		String sql = "DELETE FROM users WHERE uuid = ?";
+		
+		UUID uuid = journo.getUuid();
+		
+		try {
+			template.update(sql, new Object[]{uuid});
+			isSuccess = true;
+		} catch (DataAccessException e) {
+			isSuccess = false;
+			e.printStackTrace();
+		}
+		
+		return isSuccess;
 	}
 
 }
