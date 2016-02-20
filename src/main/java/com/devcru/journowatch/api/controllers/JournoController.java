@@ -1,45 +1,97 @@
 package com.devcru.journowatch.api.controllers;
 
-import static org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString;
-
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.devcru.journowatch.api.daoimpl.UserDaoImpl;
-import com.devcru.journowatch.api.objects.User;
+import com.devcru.journowatch.api.constants.Constants;
+import com.devcru.journowatch.api.objects.Journo;
+import com.devcru.journowatch.api.services.JournoService;
 
-import freemarker.core.ParseException;
-import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateNotFoundException;
-
+/**
+ * Created by Monitored on 12/25/2015.
+ * Journo Controller Class
+ */
 
 @Controller
+@CrossOrigin( // CORS... it's not just a shitty beer
+		origins = {
+				// use "https://" when appropriate
+				"http://" + Constants.LOCALHOST8080,
+				"http://" + Constants.OPENSHIFT
+		},
+		methods = {
+				RequestMethod.GET,
+				RequestMethod.POST,
+				RequestMethod.PUT,
+				RequestMethod.DELETE,
+				RequestMethod.OPTIONS // for the browser CORS pre-flight
+		},
+		allowedHeaders = "*" // TODO: Find the minimum-required headers necessary instead of allowing all
+)
+
 @RequestMapping(value="/journo/*")
 public class JournoController {
 	
 	@Autowired
-    private UserDaoImpl userDao;
+    private JournoService journoServ;
 	
-	@Autowired
-	private Configuration freemarkerConfiguration;
+	@RequestMapping(value="/", method=RequestMethod.POST)
+	@ResponseBody
+	public String createJourno(@RequestBody Journo journo) {
+		
+		// DEBUG BEGIN
+		String fullname = journo.getFullname();
+		String status = journo.getStatus();
+		int overallscore = journo.getOverallScore();
+		String bio = journo.getBio();
+
+		System.out.println("JC > fullname: " + fullname);
+		System.out.println("JC > status: " + status);
+		System.out.println("JC > overallscore: " + overallscore);
+		System.out.println("JC > bio: " + bio);
+		// END DEBUG
+		
+		boolean isSuccess = journoServ.createJourno(journo);
+		
+		System.out.println("JC > isSuccess: " + isSuccess);
+		
+		return isSuccess + "";
+	}
 	
-	@RequestMapping(value="/test", method=RequestMethod.GET)
-	public @ResponseBody
-	String getIndexView() throws TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
-		System.out.println("MainController > test hit! Returning data...");
+	@RequestMapping(value="/{journofullname}", method=RequestMethod.GET)
+	@ResponseBody
+	public Journo getJourno(@PathVariable("journofullname") String fullname) {
 		
-		User user = new User();
-		user.setUsername("regular");
-		user.setPassword("password");
+		Journo journo = new Journo();
 		
-		return processTemplateIntoString(freemarkerConfiguration.getTemplate("sample.ftl"), new Object());
+		journo.setFullname(fullname);
+		
+		journoServ.getJourno(journo);
+		
+		return journo;
+	}
+	
+	@RequestMapping(value="/{journofullname}", method=RequestMethod.PUT)
+	@ResponseBody
+	public boolean updateJourno(@PathVariable("journofullname") String fullname, @RequestBody Journo journo) {
+		journo.setFullname(fullname);
+		boolean isSuccess = journoServ.updateJourno(journo);
+		return isSuccess;
+	}
+	
+	@RequestMapping(value="/{journofulname}", method=RequestMethod.DELETE)
+	@ResponseBody
+	public boolean deleteJourno(@PathVariable("journofullname") String fullname) {
+		Journo journo = new Journo();
+		journo.setFullname(fullname);
+		boolean isSuccess = journoServ.deleteJourno(journo);
+		return isSuccess;
 	}
 
 }

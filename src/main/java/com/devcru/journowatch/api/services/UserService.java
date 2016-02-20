@@ -16,6 +16,8 @@ import com.devcru.journowatch.api.objects.User;
 @Service
 public class UserService {
 	
+	// TODO: Remember to remove all debug sysouts when finished 
+	
 	@Autowired
 	private UserDaoImpl ud;
 	
@@ -25,6 +27,7 @@ public class UserService {
 	
 	public boolean createUser(User user) {
 		
+		// DEBUG BEGIN
 		String username = user.getUsername();
 		String email = user.getEmail();
 		String firstName = user.getFirstName();
@@ -38,6 +41,7 @@ public class UserService {
 		System.out.println("US > lastName: " + lastName);
 		System.out.println("US > role: " + role);
 		System.out.println("US > password: " + password);
+		// DEBUG END
 		
 		boolean status = ud.createUser(user);
 		

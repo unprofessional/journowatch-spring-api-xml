@@ -12,8 +12,8 @@ public class Journo {
 
 	@JsonProperty("uuid")
 	private UUID uuid = null;
-	@JsonProperty("name")
-	private String name = null;
+	@JsonProperty("fullname")
+	private String fullname = null;
 	@JsonProperty("status")
 	private String status = null; // enum?
 	@JsonProperty("bio")
@@ -29,12 +29,12 @@ public class Journo {
 		this.uuid = uuid;
 	}
 
-	public String getName() {
-		return name;
+	public String getFullname() {
+		return fullname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 
 	public String getStatus() {

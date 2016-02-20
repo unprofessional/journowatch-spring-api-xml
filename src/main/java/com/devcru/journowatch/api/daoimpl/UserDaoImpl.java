@@ -56,6 +56,8 @@ public class UserDaoImpl implements UserDao {
 			return (rs.next() ? (User) rs.getObject(1) : null);
 		}
 	};
+	
+	/* FIXME: The follow three methods  should go elsewhere */
 
 	public void login() {
 		String loginSql = "";
@@ -140,27 +142,6 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public UUID getUuid(String username) {
-		String uuidStr = "";
-		UUID uuid = null;
-		String sql = "SELECT uuid FROM users WHERE username = ?";
-		
-		try {
-			uuidStr = template.query(sql, new Object[]{username}, rse);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-		
-		uuid = UUID.fromString(uuidStr);
-		
-		if(uuid == null) {
-			return null;
-		} else {
-			return uuid;
-		}
-	}
-
-	@Override
 	public boolean updateUser(User user) {
 		boolean isSuccess = false;
 		String sql = "UPDATE users SET email = ?, firstname = ?, lastname = ?, role = ? WHERE username = ?";
@@ -207,6 +188,29 @@ public class UserDaoImpl implements UserDao {
 		}
 		
 		return isSuccess;
+	}
+	
+	/* Helper methods */
+	
+	@Override
+	public UUID getUuid(String username) {
+		String uuidStr = "";
+		UUID uuid = null;
+		String sql = "SELECT uuid FROM users WHERE username = ?";
+		
+		try {
+			uuidStr = template.query(sql, new Object[]{username}, rse);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		uuid = UUID.fromString(uuidStr);
+		
+		if(uuid == null) {
+			return null;
+		} else {
+			return uuid;
+		}
 	}
 	
 	public boolean verifyCredentials(User user) {

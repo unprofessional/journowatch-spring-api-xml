@@ -90,7 +90,7 @@ public class UserController {
 	@ResponseBody
 	public User createUser(@PathVariable("username") String username) throws InterruptedException {
 		
-		// XXX DEBUG: Testing multiple-submit prevention on the client
+		// FIXME DEBUG: Testing multiple-submit prevention on the client
 		Thread.sleep(5000); // Sleep for 5 ms
 		
 		User user = new User();

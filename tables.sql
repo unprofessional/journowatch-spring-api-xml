@@ -1,4 +1,5 @@
 /* Ensure the OSSP extension for UUID generation is installed */
+-- CREATE EXTENSION "uuid-ossp";
 
 -- Table: users
 DROP TABLE users;
@@ -24,7 +25,7 @@ CREATE TABLE journos
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	fullname character varying(16) NOT NULL,
 	status character varying(32), -- integer NOT NULL DEFAULT -1, ???
-	overallscore integer NOT NULL DEFAULT -1,
+	overallscore integer NOT NULL DEFAULT (-1),
 	bio character varying(2048)
 )
 WITH (
@@ -62,10 +63,12 @@ WITH (
 
 -- Table: relationships
 -- DROP TABLE relationships;
+-- journos_venues_rels
 CREATE TABLE relationships
 (
-  journouuid uuid,
-  venueuuid uuid
+	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
+	journouuid uuid,
+	venueuuid uuid
 )
 WITH (
   OIDS=FALSE

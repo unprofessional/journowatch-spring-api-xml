@@ -27,6 +27,8 @@ public class JournoDaoImpl implements JournoDao {
 		this.template = new JdbcTemplate(ds);
 	}
 	
+	// To be used for all query() calls since they allow for possible null returns
+	// whereas queryForWhatever() does not
 	ResultSetExtractor<String> rse = new ResultSetExtractor<String>() {
 		@Override
 		public String extractData(ResultSet rs) throws SQLException, DataAccessException {
@@ -36,20 +38,22 @@ public class JournoDaoImpl implements JournoDao {
 			
 		}
 	};
+	
+	/* CRUD operations */
 
 	@Override
 	public boolean createJourno(Journo journo) {
 		boolean isSuccess = false;
 		
-		String sql = "INSERT INTO journos (name, overallrating, status, bio) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO journos (fullname, overallscore, status, bio) VALUES (?, ?, ?, ?)";
 		
-		String name = journo.getName();
+		String fullname = journo.getFullname();
 		int overallscore = journo.getOverallScore();
 		String status = journo.getStatus();
 		String bio = journo.getBio();
 		
 		try {
-			template.update(sql, new Object[]{name, overallscore, status, bio});
+			template.update(sql, new Object[]{fullname, overallscore, status, bio});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -61,16 +65,16 @@ public class JournoDaoImpl implements JournoDao {
 
 	@Override
 	public Journo getJourno(Journo journo) {
-		String sql = "SELECT * FROM journos WHERE name = ?";
+		String sql = "SELECT * FROM journos WHERE fullname = ?";
+		// TODO: Should use UUID or username (see approach for users)
 		
 		UUID uuid = journo.getUuid();
-		String name = journo.getName();
-		// TODO: ^^^ Should use UUID... in fact, change the getUser() method in User to fix this
+		String fullname = journo.getFullname();
 		
 		List<Map<String,Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{name});
+			rows = template.queryForList(sql, new Object[]{fullname});
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -81,7 +85,7 @@ public class JournoDaoImpl implements JournoDao {
 //		}
 		
 		for(Map<String, Object> row : rows) {
-			journo.setName((String)row.get("name"));
+			journo.setFullname((String)row.get("fullname"));
 			journo.setOverallScore((int)row.get("overallscore"));
 			journo.setStatus((String)row.get("status"));
 			journo.setBio((String)row.get("bio"));
@@ -93,16 +97,16 @@ public class JournoDaoImpl implements JournoDao {
 	@Override
 	public boolean updateJourno(Journo journo) {
 		boolean isSuccess = false; 
-		String sql = "UPDATE journo (name, status, bio, overallscore) VALUES (?, ?, ?, ?) WHERE uuid = ?";
+		String sql = "UPDATE journos (fullname, status, bio, overallscore) VALUES (?, ?, ?, ?) WHERE uuid = ?";
 		
 		UUID uuid = journo.getUuid();
-		String name = journo.getName();
+		String fullname = journo.getFullname();
 		String status = journo.getStatus();
 		String bio = journo.getBio();
 		int overallscore = journo.getOverallScore();
 		
 		try {
-			template.update(sql, new Object[]{name, status, bio, uuid, overallscore});
+			template.update(sql, new Object[]{fullname, status, bio, overallscore, uuid});
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -116,7 +120,7 @@ public class JournoDaoImpl implements JournoDao {
 	public boolean deleteJourno(Journo journo) {
 		boolean isSuccess = false;
 		
-		String sql = "DELETE FROM users WHERE uuid = ?";
+		String sql = "DELETE FROM journos WHERE uuid = ?";
 		
 		UUID uuid = journo.getUuid();
 		
