@@ -26,12 +26,12 @@ public class RatingService {
 	}
 	
 	public boolean updateRating(Rating rating) {
-		boolean status = false;
+		boolean status = rd.updateRating(rating);
 		return status;
 	}
 	
 	public boolean deleteRating(Rating rating) {
-		boolean status = false;
+		boolean status = rd.deleteRating(rating);
 		return status;
 	}
 	

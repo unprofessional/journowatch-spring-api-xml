@@ -16,10 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.devcru.journowatch.api.dao.RatingDao;
-import com.devcru.journowatch.api.objects.Journo;
 import com.devcru.journowatch.api.objects.Rating;
-import com.devcru.journowatch.api.objects.Venue;
-import com.devcru.journowatch.api.services.RatingService;
 
 public class RatingDaoImpl implements RatingDao {
 
@@ -63,55 +60,21 @@ public class RatingDaoImpl implements RatingDao {
 	@Override
 	public Rating getRating(Rating rating) {
 		
-		// Parameters should be user and journo uuid's????
-		
-		String sql = "SELECT * FROM ratings WHERE uuid = ?";
-		
 		UUID uuid = rating.getUuid();
+		UUID owneruuid = rating.getOwner();
+		UUID journouuid = rating.getJourno();
 		
-		//String sql = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
+		String sqlUuid = "SELECT * FROM ratings WHERE uuid = ?";
+		String sqlJoinUuid = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
 		
-		/*
-		 * 
-		 */
-		// FIXME: How do we do this?
-		// I guess we need to supply both owneruuid and journouuid
-		// Which means we will definitely need helper methods in both those objects
-		/*
-		 * 
-		 */
+		String sql = (uuid != null) ? sqlUuid : sqlJoinUuid;
 		
-		Object[] field = {};
+		Object[] fields = {
+				(uuid != null ? uuid : owneruuid),
+				(uuid != null ? null : journouuid)
+		};
 		
 		List<Map<String, Object>> rows = null;
-		
-		try {
-			rows = template.queryForList(sql, field, rse);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-		
-		for(Map<String, Object> row : rows) {
-			rating.setUuid((UUID)row.get("uuid"));
-			rating.setTimestamp((Timestamp)row.get("timestamp"));
-		}
-		
-		return rating;
-	}
-	
-	// @Overload
-	@Override
-	public Rating getRating(Journo journo, Venue venue) {
-		Rating rating = new Rating();
-		
-		String sql = "SELECT * FROM venues WHERE journouuid = ? AND venueuuid = ?";
-		
-		List<Map<String, Object>> rows = null;
-		
-		UUID journouuid = journo.getUuid();
-		UUID venueuuid = venue.getUuid();
-		
-		Object[] fields = {journouuid, venueuuid};
 		
 		try {
 			rows = template.queryForList(sql, fields);
@@ -122,7 +85,10 @@ public class RatingDaoImpl implements RatingDao {
 		for(Map<String, Object> row : rows) {
 			rating.setUuid((UUID)row.get("uuid"));
 			rating.setTimestamp((Timestamp)row.get("timestamp"));
-			// TODO: etc
+			rating.setOwner((UUID)row.get("owneruuid"));
+			rating.setJourno((UUID)row.get("journouuid"));
+			rating.setScore((int)row.get("score"));
+			rating.setComment((String)row.get("comment"));
 		}
 		
 		return rating;

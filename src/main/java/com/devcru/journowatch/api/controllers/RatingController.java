@@ -36,6 +36,20 @@ public class RatingController {
 		return rating;
 	}
 	
+	// XXX: TEST ENDPOINT FOR RatingDaoImpl LOGIC
+	@RequestMapping(value="/{ouuid}/{juuid}", method=RequestMethod.GET)
+	@ResponseBody
+	public Rating getRating(@PathVariable("ouuid") UUID ouuid, @PathVariable("juuid") UUID juuid) {
+		Rating rating = new Rating();
+		
+		rating.setOwner(ouuid);
+		rating.setJourno(juuid);
+		
+		ratingServ.getRating(rating);
+		
+		return rating;
+	}
+	
 	@RequestMapping(value="/{ratinguuid}", method = RequestMethod.PUT)
 	@ResponseBody
 	public boolean updateRating(@PathVariable("ratinguuid") UUID uuid, @RequestBody Rating rating) {
