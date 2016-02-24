@@ -5,17 +5,17 @@
 DROP TABLE users;
 CREATE TABLE users
 (
-  uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
-  username character varying(16) NOT NULL,
-  email character varying(64),
-  firstname character varying(64),
-  lastname character varying(64),
-  role integer, -- integer???
-  password character varying(64) NOT NULL,
-  CONSTRAINT users_pkey PRIMARY KEY (uuid)
+	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
+	username character varying(16) NOT NULL,
+	email character varying(64),
+	firstname character varying(64),
+	lastname character varying(64),
+	role integer, -- integer???
+	password character varying(64) NOT NULL,
+	CONSTRAINT users_pkey PRIMARY KEY (uuid)
 )
 WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
 -- Table: journos
@@ -29,7 +29,7 @@ CREATE TABLE journos
 	bio character varying(2048)
 )
 WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
 -- Table: venues
@@ -43,26 +43,27 @@ CREATE TABLE venues
 	bio character varying(2048)
 )
 WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
--- Table: rating
+-- Table: ratings
 DROP TABLE ratings;
 CREATE TABLE ratings
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
-	timesubmitted timestamp with time zone NOT NULL DEFAULT now(),
+	"timestamp" timestamp with time zone NOT NULL DEFAULT now(),
 	owneruuid uuid,
 	journouuid uuid,
-	score integer NOT NULL DEFAULT -1, -- no score provided
-	comment character varying(1024)
+	score integer NOT NULL DEFAULT (-1),
+	comment character varying(1024),
+	CONSTRAINT ratings_pkey PRIMARY KEY (uuid)
 )
 WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
 
 -- Table: partnerships
--- DROP TABLE partnerships;
+DROP TABLE partnerships;
 CREATE TABLE partnerships
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
@@ -70,5 +71,5 @@ CREATE TABLE partnerships
 	venueuuid uuid
 )
 WITH (
-  OIDS=FALSE
+	OIDS=FALSE
 );
