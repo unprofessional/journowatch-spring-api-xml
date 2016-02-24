@@ -46,7 +46,7 @@ WITH (
   OIDS=FALSE
 );
 
--- Table: ratings
+-- Table: rating
 DROP TABLE ratings;
 CREATE TABLE ratings
 (
@@ -61,10 +61,9 @@ WITH (
   OIDS=FALSE
 );
 
--- Table: relationships
--- DROP TABLE relationships;
--- journos_venues_rels
-CREATE TABLE relationships
+-- Table: partnerships
+-- DROP TABLE partnerships;
+CREATE TABLE partnerships
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	journouuid uuid,

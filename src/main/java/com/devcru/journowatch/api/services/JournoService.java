@@ -1,6 +1,7 @@
 package com.devcru.journowatch.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.devcru.journowatch.api.daoimpl.JournoDaoImpl;
 import com.devcru.journowatch.api.objects.Journo;
@@ -12,6 +13,7 @@ import com.devcru.journowatch.api.objects.Journo;
  *
  */
 
+@Service
 public class JournoService {
 
 	@Autowired

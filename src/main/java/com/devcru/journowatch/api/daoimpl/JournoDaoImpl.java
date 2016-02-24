@@ -97,7 +97,7 @@ public class JournoDaoImpl implements JournoDao {
 	@Override
 	public boolean updateJourno(Journo journo) {
 		boolean isSuccess = false; 
-		String sql = "UPDATE journos (fullname, status, bio, overallscore) VALUES (?, ?, ?, ?) WHERE uuid = ?";
+		String sql = "UPDATE journos SET fullname = ?, status = ?, bio = ?, overallscore = ? WHERE uuid = ?";
 		
 		UUID uuid = journo.getUuid();
 		String fullname = journo.getFullname();

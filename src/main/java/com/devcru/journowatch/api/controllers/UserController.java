@@ -107,7 +107,7 @@ public class UserController {
 		System.out.println("PUT user/{username} hit!");
 		// Should we first associate the username with the JSON struct?
 		// i.e. is there a data integrity risk here?  Analyze further...
-		//user.setUsername(username);
+		//user.setUsername(username); // client should pass correct username in JSON struct...
 		boolean status = userServ.updateUser(user);
 		return status + "";
 		// ???: return JsonResponse;

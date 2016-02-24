@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.devcru.journowatch.api.dao.RatingDao;
 import com.devcru.journowatch.api.objects.Rating;
+import com.devcru.journowatch.api.services.RatingService;
 
 public class RatingDaoImpl implements RatingDao {
 
@@ -39,16 +40,15 @@ public class RatingDaoImpl implements RatingDao {
 	public boolean createRating(Rating rating) {
 		boolean isSuccess = false;
 
-		String sql = "INSERT INTO ratings (timestamp, owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO ratings (owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?) ";
 
-		Timestamp timestamp = rating.getTimestamp();
 		UUID owneruuid = rating.getOwner();
 		UUID journouuid = rating.getJourno();
 		int score = rating.getScore();
 		String comment = rating.getComment();
 
 		try {
-			template.update(sql, new Object[] { timestamp, owneruuid, journouuid, score, comment });
+			template.update(sql, new Object[] { owneruuid, journouuid, score, comment });
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -61,7 +61,25 @@ public class RatingDaoImpl implements RatingDao {
 	@Override
 	public Rating getRating(Rating rating) {
 		
-		String sql = "SELECT * FROM ratings WHERE uuid = ?";
+		// Parameters should be user and journo uuid's????
+		
+		//String sql = "SELECT * FROM ratings WHERE uuid = ?";
+		
+		String sql = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
+		
+		/*
+		 * 
+		 */
+		// FIXME: How do we do this?
+		// I guess we need to supply both owneruuid and journouuid
+		// Which means we will definitely need helper methods in both those objects
+		/*
+		 * 
+		 */
+		
+		//UUID uuid = rating.getUuid();
+		
+		
 		
 		List<Map<String, Object>> rows = null;
 		
@@ -83,16 +101,16 @@ public class RatingDaoImpl implements RatingDao {
 	public boolean updateRating(Rating rating) {
 		boolean isSuccess = false;
 
-		String sql = "UPDATE ratings SET timestamp = ?, ownerduuid = ?, journouuid = ?, score = ?, comment = ?";
+		String sql = "UPDATE ratings SET owneruuid = ?, journouuid = ?, score = ?, comment = ? WHERE uuid = ?";
 
-		Timestamp timestamp = rating.getTimestamp();
+		UUID uuid = rating.getUuid();
 		UUID owneruuid = rating.getOwner();
 		UUID journouuid = rating.getJourno();
 		int score = rating.getScore();
 		String comment = rating.getComment();
 
 		try {
-			template.update(sql, new Object[] { timestamp, owneruuid, journouuid, score, comment });
+			template.update(sql, new Object[] { owneruuid, journouuid, score, comment, uuid });
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;

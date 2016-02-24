@@ -1,10 +1,12 @@
 package com.devcru.journowatch.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.devcru.journowatch.api.daoimpl.RatingDaoImpl;
 import com.devcru.journowatch.api.objects.Rating;
 
+@Service
 public class RatingService {
 	
 	@Autowired
