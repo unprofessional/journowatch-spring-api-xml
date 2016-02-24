@@ -57,23 +57,6 @@ public class UserDaoImpl implements UserDao {
 		}
 	};
 	
-	/* FIXME: The follow three methods  should go elsewhere */
-
-	public void login() {
-		String loginSql = "";
-		template.execute(loginSql);
-	}
-
-	public void rateVenue() {
-		String rateVenueSql = "";
-		template.execute(rateVenueSql);
-	}
-
-	public void rateJourno() {
-		String rateJourno = "";
-		template.execute(rateJourno);
-	}
-	
 	/* CRUD Operations */
 
 	@Override
@@ -107,18 +90,33 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User getUserByUsername(User user) {
+	public User getUser(User user) {
 		
-		// TODO: Go ahead and make this a catch-all method (uuid, username, email)
+		// This works because uuid, username, and email are all unique
+		// As long as we know one, we can find the rest
 		
-		//boolean isSuccess = false;
-		String sql = "SELECT uuid, username, email, firstname, lastname, role FROM users WHERE username = ?";
+		String sqlUuid = "SELECT uuid, username, email, firstname, lastname, role FROM users WHERE uuid = ?";
+		String sqlUsername = "SELECT uuid, username, email, firstname, lastname, role FROM users WHERE username = ?";
+		String sqlEmail = "SELECT uuid, username, email, firstname, lastname, role FROM users WHERE email = ?";
+		
+		UUID uuid = user.getUuid();
+		String username = user.getUsername();
+		String email = user.getEmail();
+		
+		String sql = uuid == null ? ( username == null ? sqlEmail : sqlUsername) : sqlUuid;
+		
+		if(email == null) {
+			System.out.println("email is null, no identifiable user data to query with!");
+		} // TODO: In which case maybe not even run the query
+		
 		List<Map<String, Object>> rows = null;
 		
-		String username = user.getUsername();
+		Object[] field = {
+				uuid == null ? ( username == null ? email : username) : uuid
+		};
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{username});
+			rows = template.queryForList(sql, field);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -135,7 +133,7 @@ public class UserDaoImpl implements UserDao {
 			user.setFirstName((String)row.get("firstname"));
 			user.setLastName((String)row.get("lastname"));
 			user.setRole((int)row.get("role"));
-			user.setPassword((String) "REDACTED"); // Is this necessary?
+			user.setPassword((String) "REDACTED"); // Is this necessary?  Might just come back as null otherwise
 		}
 		
 		return user;		
@@ -194,33 +192,32 @@ public class UserDaoImpl implements UserDao {
 	
 	/* Helper methods */
 	
-	@Override
-	public UUID getUuid(String username) {
-		String uuidStr = "";
-		UUID uuid = null;
-		String sql = "SELECT uuid FROM users WHERE username = ?";
-		
-		try {
-			uuidStr = template.query(sql, new Object[]{username}, rse);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-		
-		uuid = UUID.fromString(uuidStr);
-		
-		if(uuid == null) {
-			return null;
-		} else {
-			return uuid;
-		}
-	}
-	
 	public boolean verifyCredentials(User user) {
 		boolean isSuccess = false;
 		
 		String sql = "";
 		
 		return isSuccess;
+	}
+	
+	/* FIXME: The follow three methods  should go elsewhere */
+
+	@Override
+	public void login() {
+		String loginSql = "";
+		template.execute(loginSql);
+	}
+
+	@Override
+	public void rateVenue() {
+		String rateVenueSql = "";
+		template.execute(rateVenueSql);
+	}
+
+	@Override
+	public void rateJourno() {
+		String rateJourno = "";
+		template.execute(rateJourno);
 	}
 
 }

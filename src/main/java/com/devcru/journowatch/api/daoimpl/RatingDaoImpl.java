@@ -16,7 +16,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.devcru.journowatch.api.dao.RatingDao;
+import com.devcru.journowatch.api.objects.Journo;
 import com.devcru.journowatch.api.objects.Rating;
+import com.devcru.journowatch.api.objects.Venue;
 import com.devcru.journowatch.api.services.RatingService;
 
 public class RatingDaoImpl implements RatingDao {
@@ -63,9 +65,11 @@ public class RatingDaoImpl implements RatingDao {
 		
 		// Parameters should be user and journo uuid's????
 		
-		//String sql = "SELECT * FROM ratings WHERE uuid = ?";
+		String sql = "SELECT * FROM ratings WHERE uuid = ?";
 		
-		String sql = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
+		UUID uuid = rating.getUuid();
+		
+		//String sql = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
 		
 		/*
 		 * 
@@ -77,14 +81,12 @@ public class RatingDaoImpl implements RatingDao {
 		 * 
 		 */
 		
-		//UUID uuid = rating.getUuid();
-		
-		
+		Object[] field = {};
 		
 		List<Map<String, Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{}, rse);
+			rows = template.queryForList(sql, field, rse);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -92,6 +94,35 @@ public class RatingDaoImpl implements RatingDao {
 		for(Map<String, Object> row : rows) {
 			rating.setUuid((UUID)row.get("uuid"));
 			rating.setTimestamp((Timestamp)row.get("timestamp"));
+		}
+		
+		return rating;
+	}
+	
+	// @Overload
+	@Override
+	public Rating getRating(Journo journo, Venue venue) {
+		Rating rating = new Rating();
+		
+		String sql = "SELECT * FROM venues WHERE journouuid = ? AND venueuuid = ?";
+		
+		List<Map<String, Object>> rows = null;
+		
+		UUID journouuid = journo.getUuid();
+		UUID venueuuid = venue.getUuid();
+		
+		Object[] fields = {journouuid, venueuuid};
+		
+		try {
+			rows = template.queryForList(sql, fields);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		for(Map<String, Object> row : rows) {
+			rating.setUuid((UUID)row.get("uuid"));
+			rating.setTimestamp((Timestamp)row.get("timestamp"));
+			// TODO: etc
 		}
 		
 		return rating;

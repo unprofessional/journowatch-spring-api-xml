@@ -65,6 +65,10 @@ public class VenueDaoImpl implements VenueDao {
 		
 		// XXX: Caveats: name is assumed to be unique.  Enforce this in the DB constraints!!
 		
+		/**
+		 * TODO: DO THIS FOR ALL OTHER DAOIMPLs!!!!
+		 */
+		
 		String sqlUuid = "SELECT * FROM venues WHERE uuid = ?";
 		String sqlName = "SELECT * FROM venue WHERE name = ?";
 		

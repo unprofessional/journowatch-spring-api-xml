@@ -2,16 +2,23 @@ package com.devcru.journowatch.api.objects;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by Monitored on 12/27/2015. Venue model class (POJO)
  */
 
 public class Venue {
 
+	@JsonProperty("uuid")
 	private UUID uuid;
+	@JsonProperty("name")
 	private String name;
+	@JsonProperty("status")
 	private int status; // Make sure to check DB table that this datatype is correct
+	@JsonProperty("overallscore")
 	private int overallscore;
+	@JsonProperty("bio")
 	private String bio;
 
 	public UUID getUuid() {

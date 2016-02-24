@@ -1,7 +1,5 @@
 package com.devcru.journowatch.api.dao;
 
-import java.util.UUID;
-
 import com.devcru.journowatch.api.objects.User;
 
 /**
@@ -12,14 +10,14 @@ public interface UserDao {
 	
 	public boolean createUser(User user);
 	
-	public User getUserByUsername(User user); // Change this to getUser() that can check for UUID and email, too
+	public User getUser(User user); // TODO: Check for UUID and email, too
 	
 	public boolean updateUser(User user);
 	
 	public boolean deleteUser(User user);
 	
 	// Utility methods
-	public UUID getUuid(String username);
+	//public User getUserViaUsername(String username);
 
 	// Maybe methods?
     public void login();

@@ -52,7 +52,7 @@ public class UserService {
 	
 	public User getUser(User user) {
 		// TODO: set username/uuid/email
-		user = ud.getUserByUsername(user);
+		user = ud.getUser(user);
 		return user;
 	}
 	
