@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -23,6 +24,7 @@ public class PartnershipDaoImpl implements PartnershipDao {
 	protected JdbcTemplate template;
 	
 	@Autowired
+	@Qualifier("dataSource")
 	public void setDataSource(DataSource ds) {
 		this.template = new JdbcTemplate(ds);
 	}
