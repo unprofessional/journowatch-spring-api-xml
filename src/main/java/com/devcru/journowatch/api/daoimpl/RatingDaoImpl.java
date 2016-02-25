@@ -39,10 +39,10 @@ public class RatingDaoImpl implements RatingDao {
 	public boolean createRating(Rating rating) {
 		boolean isSuccess = false;
 
-		String sql = "INSERT INTO ratings (owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?) ";
+		String sql = "INSERT INTO ratings (owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?)";
 
-		UUID owneruuid = rating.getOwner();
-		UUID journouuid = rating.getJourno();
+		UUID owneruuid = rating.getOwneruuid();
+		UUID journouuid = rating.getJournouuid();
 		int score = rating.getScore();
 		String comment = rating.getComment();
 
@@ -53,6 +53,8 @@ public class RatingDaoImpl implements RatingDao {
 			isSuccess = false;
 			e.printStackTrace();
 		}
+		
+		System.out.println("RDI > isSuccess: " + isSuccess);
 
 		return isSuccess;
 	}
@@ -61,8 +63,8 @@ public class RatingDaoImpl implements RatingDao {
 	public Rating getRating(Rating rating) {
 		
 		UUID uuid = rating.getUuid();
-		UUID owneruuid = rating.getOwner();
-		UUID journouuid = rating.getJourno();
+		UUID owneruuid = rating.getOwneruuid();
+		UUID journouuid = rating.getJournouuid();
 		
 		String sqlUuid = "SELECT * FROM ratings WHERE uuid = ?";
 		String sqlJoinUuid = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
@@ -89,8 +91,8 @@ public class RatingDaoImpl implements RatingDao {
 		for(Map<String, Object> row : rows) {
 			rating.setUuid((UUID)row.get("uuid"));
 			rating.setTimestamp((Timestamp)row.get("timestamp"));
-			rating.setOwner((UUID)row.get("owneruuid"));
-			rating.setJourno((UUID)row.get("journouuid"));
+			rating.setOwneruuid((UUID)row.get("owneruuid"));
+			rating.setJournouuid((UUID)row.get("journouuid"));
 			rating.setScore((int)row.get("score"));
 			rating.setComment((String)row.get("comment"));
 		}
@@ -105,8 +107,8 @@ public class RatingDaoImpl implements RatingDao {
 		String sql = "UPDATE ratings SET owneruuid = ?, journouuid = ?, score = ?, comment = ? WHERE uuid = ?";
 
 		UUID uuid = rating.getUuid();
-		UUID owneruuid = rating.getOwner();
-		UUID journouuid = rating.getJourno();
+		UUID owneruuid = rating.getOwneruuid();
+		UUID journouuid = rating.getJournouuid();
 		int score = rating.getScore();
 		String comment = rating.getComment();
 

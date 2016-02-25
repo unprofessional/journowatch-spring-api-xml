@@ -26,8 +26,8 @@ public class RatingController {
 		
 		System.out.println("RC > rating.getUuid: " + rating.getUuid());
 		System.out.println("RC > rating.getTimestamp: " + rating.getTimestamp());
-		System.out.println("RC > rating.getOwner: " + rating.getOwner());
-		System.out.println("RC > rating.getJourno: " + rating.getJourno());
+		System.out.println("RC > rating.getOwner: " + rating.getOwneruuid());
+		System.out.println("RC > rating.getJourno: " + rating.getJournouuid());
 		System.out.println("RC > rating.getScore: " + rating.getScore());
 		System.out.println("RC > rating.getComment: " + rating.getComment());
 		
@@ -50,8 +50,8 @@ public class RatingController {
 	public Rating getRating(@PathVariable("ouuid") UUID ouuid, @PathVariable("juuid") UUID juuid) {
 		Rating rating = new Rating();
 		
-		rating.setOwner(ouuid);
-		rating.setJourno(juuid);
+		rating.setOwneruuid(ouuid);
+		rating.setJournouuid(juuid);
 		
 		ratingServ.getRating(rating);
 		

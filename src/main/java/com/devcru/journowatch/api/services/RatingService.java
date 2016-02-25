@@ -20,8 +20,8 @@ public class RatingService {
 		
 		System.out.println("RS > rating.getUuid: " + rating.getUuid());
 		System.out.println("RS > rating.getTimestamp: " + rating.getTimestamp());
-		System.out.println("RS > rating.getOwner: " + rating.getOwner());
-		System.out.println("RS > rating.getJourno: " + rating.getJourno());
+		System.out.println("RS > rating.getOwner: " + rating.getOwneruuid());
+		System.out.println("RS > rating.getJourno: " + rating.getJournouuid());
 		System.out.println("RS > rating.getScore: " + rating.getScore());
 		System.out.println("RS > rating.getComment: " + rating.getComment());
 		

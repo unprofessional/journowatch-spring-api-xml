@@ -14,9 +14,9 @@ public class Rating {
 	@JsonProperty("timestamp")
 	private Timestamp timestamp;
 	@JsonProperty("owneruuid")
-	private UUID owner; // UUID of the user who owns this rating
+	private UUID owneruuid; // UUID of the user who owns this rating
 	@JsonProperty("journouuid")
-	private UUID journo; // UUID of the journo for whom this applies
+	private UUID journouuid; // UUID of the journo for whom this applies
 	@JsonProperty("score")
 	private int score; // (1-100?)
 	@JsonProperty("comment")
@@ -38,20 +38,20 @@ public class Rating {
 		this.timestamp = timestamp;
 	}
 
-	public UUID getOwner() {
-		return owner;
+	public UUID getOwneruuid() {
+		return owneruuid;
 	}
 
-	public void setOwner(UUID owner) {
-		this.owner = owner;
+	public void setOwneruuid(UUID owneruuid) {
+		this.owneruuid = owneruuid;
 	}
 
-	public UUID getJourno() {
-		return journo;
+	public UUID getJournouuid() {
+		return journouuid;
 	}
 
-	public void setJourno(UUID journo) {
-		this.journo = journo;
+	public void setJournouuid(UUID journouuid) {
+		this.journouuid = journouuid;
 	}
 
 	public int getScore() {
