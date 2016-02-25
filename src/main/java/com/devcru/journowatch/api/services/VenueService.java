@@ -1,14 +1,16 @@
 package com.devcru.journowatch.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.devcru.journowatch.api.daoimpl.VenueDaoImpl;
 import com.devcru.journowatch.api.objects.Venue;
 
+@Service
 public class VenueService {
 	
 	@Autowired
-	VenueDaoImpl vd;
+	private VenueDaoImpl vd;
 	
 	public boolean createVenue(Venue venue) {
 		boolean isSuccess = vd.createVenue(venue);
