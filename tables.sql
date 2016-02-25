@@ -26,7 +26,8 @@ CREATE TABLE journos
 	fullname character varying(16) NOT NULL,
 	status character varying(32), -- integer NOT NULL DEFAULT -1, ???
 	overallscore integer NOT NULL DEFAULT (-1),
-	bio character varying(2048)
+	bio character varying(2048),
+	CONSTRAINT journos_pkey PRIMARY KEY (uuid)
 )
 WITH (
 	OIDS=FALSE

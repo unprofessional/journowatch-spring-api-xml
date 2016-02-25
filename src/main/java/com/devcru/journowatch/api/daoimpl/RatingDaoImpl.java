@@ -69,6 +69,10 @@ public class RatingDaoImpl implements RatingDao {
 		
 		String sql = (uuid != null) ? sqlUuid : sqlJoinUuid;
 		
+//		if(uuid != null) {
+//			sqlUuid += " uuid = " + uuid;
+//		}
+		
 		Object[] fields = {
 				(uuid != null ? uuid : owneruuid),
 				(uuid != null ? null : journouuid)

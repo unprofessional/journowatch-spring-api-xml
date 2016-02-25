@@ -23,6 +23,14 @@ public class RatingController {
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean createRating(@RequestBody Rating rating) {
+		
+		System.out.println("RC > rating.getUuid: " + rating.getUuid());
+		System.out.println("RC > rating.getTimestamp: " + rating.getTimestamp());
+		System.out.println("RC > rating.getOwner: " + rating.getOwner());
+		System.out.println("RC > rating.getJourno: " + rating.getJourno());
+		System.out.println("RC > rating.getScore: " + rating.getScore());
+		System.out.println("RC > rating.getComment: " + rating.getComment());
+		
 		boolean isSuccess = ratingServ.createRating(rating);
 		return isSuccess;
 	}
