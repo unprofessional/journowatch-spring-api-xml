@@ -37,6 +37,9 @@ public class RatingDaoImpl implements RatingDao {
 
 	@Override
 	public boolean createRating(Rating rating) {
+		
+		System.out.println("RDI > reached!");
+		
 		boolean isSuccess = false;
 
 		String sql = "INSERT INTO ratings (owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?)";
@@ -45,6 +48,13 @@ public class RatingDaoImpl implements RatingDao {
 		UUID journouuid = rating.getJournouuid();
 		int score = rating.getScore();
 		String comment = rating.getComment();
+		
+		System.out.println("RDI > rating.getUuid: " + rating.getUuid());
+		System.out.println("RDI > rating.getTimestamp: " + rating.getTimestamp());
+		System.out.println("RDI > rating.getOwner: " + rating.getOwneruuid());
+		System.out.println("RDI" + rating.getJournouuid());
+		System.out.println("RDI > rating.getScore: " + rating.getScore());
+		System.out.println("RDI > rating.getComment: " + rating.getComment());
 
 		try {
 			template.update(sql, new Object[] { owneruuid, journouuid, score, comment });
