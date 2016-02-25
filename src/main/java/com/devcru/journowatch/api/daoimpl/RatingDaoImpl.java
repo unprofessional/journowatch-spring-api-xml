@@ -81,25 +81,14 @@ public class RatingDaoImpl implements RatingDao {
 		
 		String sql = (uuid != null) ? sqlUuid : sqlJoinUuid;
 		
-//		if(uuid != null) {
-//			sqlUuid += " uuid = " + uuid;
-//		}
-		
-		// FIXME: After testing, this does not work since in the known-uuid case,
-		// it creates Object[] fields = { uuid, null };
-		// Need to figure out how to pass just the one element and not a second empty/null one...
-		
-		Object[] fields = {
-				(uuid != null ? uuid : owneruuid),
-				(uuid != null ? null : journouuid)
-		};
-		
 		List<Map<String, Object>> rows = null;
 		
-		try {
+		if(uuid != null) {
+			Object[] field = {uuid};
+			rows = template.queryForList(sql, field);
+		} else {
+			Object[] fields = {owneruuid, journouuid};
 			rows = template.queryForList(sql, fields);
-		} catch (DataAccessException e) {
-			e.printStackTrace();
 		}
 		
 		for(Map<String, Object> row : rows) {
