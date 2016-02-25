@@ -85,6 +85,10 @@ public class RatingDaoImpl implements RatingDao {
 //			sqlUuid += " uuid = " + uuid;
 //		}
 		
+		// FIXME: After testing, this does not work since in the known-uuid case,
+		// it creates Object[] fields = { uuid, null };
+		// Need to figure out how to pass just the one element and not a second empty/null one...
+		
 		Object[] fields = {
 				(uuid != null ? uuid : owneruuid),
 				(uuid != null ? null : journouuid)
