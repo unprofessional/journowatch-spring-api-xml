@@ -10,7 +10,7 @@ import com.devcru.journowatch.api.objects.Rating;
 public class RatingService {
 	
 	@Autowired
-	private static RatingDaoImpl rd;
+	private RatingDaoImpl rd;
 	
 	/*
 	 * CRUD stuff
