@@ -81,7 +81,7 @@ public class PartnershipDaoImpl implements PartnershipDao {
 		List<Map<String, Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{journouuid, venueuuid}, rseObject); // May have problems?
+			rows = template.queryForList(sql, new Object[]{journouuid, venueuuid});
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
@@ -106,13 +106,13 @@ public class PartnershipDaoImpl implements PartnershipDao {
 		List<Map<String, Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{uuid}); // May have problems?
+			rows = template.queryForList(sql, new Object[]{uuid});
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
 		
 		for(Map<String, Object> row : rows) {
-			//partnership.setUuid((UUID)row.get("uuid"));
+			partnership.setUuid((UUID)row.get("uuid"));
 			partnership.setJournouuid((UUID)row.get("journouuid"));
 			partnership.setVenueuuid((UUID)row.get("venueuuid"));
 			partnership.setType((int)row.get("type"));
