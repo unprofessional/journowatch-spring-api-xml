@@ -18,7 +18,7 @@ public class PartnershipService {
 	}
 	
 	public Partnership getPartnership(Partnership partnership) {
-		partnership = pd.getPartnershipViaUuid(partnership);
+		partnership = pd.getPartnership(partnership);
 		return partnership;
 	}
 	
