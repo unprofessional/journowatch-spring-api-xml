@@ -80,8 +80,8 @@ public class PartnershipDaoImpl implements PartnershipDao {
 		
 		try {
 			rows = template.queryForList(
-				(uuid != null ? sqlJoinUuid : sqlUuid),
-				(uuid != null ? new Object[]{juuid, vuuid} : new Object[]{uuid})
+				(uuid != null ? sqlUuid : sqlJoinUuid),
+				(uuid != null ? new Object[]{uuid} : new Object[]{juuid, vuuid})
 			);
 		} catch (DataAccessException e) {
 			e.printStackTrace();

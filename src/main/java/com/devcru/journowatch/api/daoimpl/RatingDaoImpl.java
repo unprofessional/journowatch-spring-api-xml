@@ -83,8 +83,8 @@ public class RatingDaoImpl implements RatingDao {
 		
 		try {
 			rows = template.queryForList(
-				(uuid != null ? sqlJoinUuid : sqlUuid),
-				(uuid != null ? new Object[]{ouuid, juuid} : new Object[]{uuid})
+				(uuid != null ? sqlUuid : sqlJoinUuid),
+				(uuid != null ? new Object[]{uuid} : new Object[]{ouuid, juuid})
 			);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
