@@ -73,22 +73,21 @@ public class RatingDaoImpl implements RatingDao {
 	public Rating getRating(Rating rating) {
 		
 		UUID uuid = rating.getUuid();
-		UUID owneruuid = rating.getOwneruuid();
-		UUID journouuid = rating.getJournouuid();
+		UUID ouuid = rating.getOwneruuid();
+		UUID juuid = rating.getJournouuid();
 		
 		String sqlUuid = "SELECT * FROM ratings WHERE uuid = ?";
 		String sqlJoinUuid = "SELECT * FROM ratings WHERE owneruuid = ? AND journouuid = ?";
 		
-		String sql = (uuid != null) ? sqlUuid : sqlJoinUuid;
-		
 		List<Map<String, Object>> rows = null;
 		
-		if(uuid != null) {
-			Object[] field = {uuid};
-			rows = template.queryForList(sql, field);
-		} else {
-			Object[] fields = {owneruuid, journouuid};
-			rows = template.queryForList(sql, fields);
+		try {
+			rows = template.queryForList(
+				(uuid != null ? sqlJoinUuid : sqlUuid),
+				(uuid != null ? new Object[]{ouuid, juuid} : new Object[]{uuid})
+			);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
 		}
 		
 		for(Map<String, Object> row : rows) {

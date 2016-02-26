@@ -15,9 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.devcru.journowatch.api.dao.PartnershipDao;
-import com.devcru.journowatch.api.objects.Journo;
 import com.devcru.journowatch.api.objects.Partnership;
-import com.devcru.journowatch.api.objects.Venue;
 
 public class PartnershipDaoImpl implements PartnershipDao {
 	
@@ -29,7 +27,6 @@ public class PartnershipDaoImpl implements PartnershipDao {
 		this.template = new JdbcTemplate(ds);
 	}
 	
-	// TODO: Verify if we even need this to cover the getPartnership() method
 	// To be used for all query() calls since they allow for possible null returns
 	// whereas queryForWhatever() does not
 	ResultSetExtractor<String> rse = new ResultSetExtractor<String>() {
@@ -70,43 +67,22 @@ public class PartnershipDaoImpl implements PartnershipDao {
 	}
 
 	@Override
-	public Partnership getPartnership(Journo journo, Venue venue) {
-		Partnership partnership = new Partnership();
-		
-		String sql = "SELECT * FROM partnerships WHERE journouuid = ? AND venueuuid = ?";
+	public Partnership getPartnership(Partnership partnership) {
 
-		UUID journouuid = journo.getUuid();
-		UUID venueuuid = venue.getUuid();
-		
-		List<Map<String, Object>> rows = null;
-		
-		try {
-			rows = template.queryForList(sql, new Object[]{journouuid, venueuuid});
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-		}
-		
-		for(Map<String, Object> row : rows) {
-			partnership.setUuid((UUID)row.get("uuid"));
-			partnership.setJournouuid((UUID)row.get("journouuid"));
-			partnership.setVenueuuid((UUID)row.get("venueuuid"));
-			partnership.setType((int)row.get("type")); // use Integer class instead???
-		}
-		
-		return partnership;
-	}
-	
-	// TODO: This should be the "TRUE way"
-	@Override
-	public Partnership getPartnershipViaUuid(Partnership partnership) {
-		
-		String sql = "SELECT * FROM partnerships WHERE uuid = ?";
 		UUID uuid = partnership.getUuid();
+		UUID juuid = partnership.getJournouuid();
+		UUID vuuid = partnership.getVenueuuid();
+		
+		String sqlUuid = "SELECT * FROM partnerships WHERE uuid = ?";
+		String sqlJoinUuid = "SELECT * FROM partnerships WHERE journouuid = ? AND venueuuid = ?";
 		
 		List<Map<String, Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{uuid});
+			rows = template.queryForList(
+				(uuid != null ? sqlJoinUuid : sqlUuid),
+				(uuid != null ? new Object[]{juuid, vuuid} : new Object[]{uuid})
+			);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
