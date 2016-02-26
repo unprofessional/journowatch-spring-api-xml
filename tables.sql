@@ -67,9 +67,11 @@ WITH (
 DROP TABLE partnerships;
 CREATE TABLE partnerships
 (
-	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	journouuid uuid,
-	venueuuid uuid
+	venueuuid uuid,
+	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
+	type integer NOT NULL DEFAULT (-1),
+	CONSTRAINT relationships_pkey PRIMARY KEY (uuid)
 )
 WITH (
 	OIDS=FALSE

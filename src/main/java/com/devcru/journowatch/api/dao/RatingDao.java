@@ -8,6 +8,8 @@ public interface RatingDao {
 	
 	public Rating getRating(Rating rating);
 	
+	// Probably going to be the most under-used method...
+	// Consider removing entirely.
 	public boolean updateRating(Rating rating);
 	
 	public boolean deleteRating(Rating rating);
