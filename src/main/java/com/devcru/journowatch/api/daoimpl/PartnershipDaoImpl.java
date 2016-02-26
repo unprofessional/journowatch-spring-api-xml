@@ -106,7 +106,7 @@ public class PartnershipDaoImpl implements PartnershipDao {
 		List<Map<String, Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{uuid}, rseObject); // May have problems?
+			rows = template.queryForList(sql, new Object[]{uuid}); // May have problems?
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
