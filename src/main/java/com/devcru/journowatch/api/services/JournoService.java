@@ -18,7 +18,7 @@ public class JournoService {
 
 	@Autowired
 	private JournoDaoImpl jd;
-
+	
 	/*
 	 * CRUD stuff
 	 */
@@ -64,6 +64,6 @@ public class JournoService {
 	 * Supporting business-logic stuff
 	 */
 	
-	// Can't think of anything right now.  Will come back to this as needed.
+	// Nothing yet.
 	
 }

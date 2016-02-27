@@ -1,5 +1,7 @@
 package com.devcru.journowatch.api.controllers;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.devcru.journowatch.api.constants.Constants;
 import com.devcru.journowatch.api.objects.Journo;
+import com.devcru.journowatch.api.objects.Partnership;
 import com.devcru.journowatch.api.services.JournoService;
+import com.devcru.journowatch.api.services.PartnershipService;
 
 /**
  * Created by Monitored on 12/25/2015.
@@ -40,6 +44,8 @@ public class JournoController {
 	
 	@Autowired
     private JournoService journoServ;
+	@Autowired
+	private PartnershipService partnershipServ;
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
@@ -67,13 +73,9 @@ public class JournoController {
 	@RequestMapping(value="/{journofullname}", method=RequestMethod.GET)
 	@ResponseBody
 	public Journo getJourno(@PathVariable("journofullname") String fullname) {
-		
 		Journo journo = new Journo();
-		
 		journo.setFullname(fullname);
-		
 		journoServ.getJourno(journo);
-		
 		return journo;
 	}
 	
@@ -85,13 +87,25 @@ public class JournoController {
 		return isSuccess;
 	}
 	
-	@RequestMapping(value="/{journofulname}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{journofullname}", method=RequestMethod.DELETE)
 	@ResponseBody
 	public boolean deleteJourno(@PathVariable("journofullname") String fullname) {
 		Journo journo = new Journo();
 		journo.setFullname(fullname);
 		boolean isSuccess = journoServ.deleteJourno(journo);
 		return isSuccess;
+	}
+	
+	/* Supporting endponts */
+	
+	@RequestMapping(value="/{juuid}/venue/{vuuid}", method=RequestMethod.GET)
+	@ResponseBody
+	public Partnership getPartnership(@PathVariable("juuid") UUID juuid, @PathVariable("vuuid") UUID vuuid) {		
+		Partnership partnership = new Partnership();
+		partnership.setJournouuid(juuid);
+		partnership.setVenueuuid(vuuid);
+		partnership = partnershipServ.getPartnership(partnership);
+		return partnership;
 	}
 
 }

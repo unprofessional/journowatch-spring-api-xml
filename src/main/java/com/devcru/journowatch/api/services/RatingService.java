@@ -6,6 +6,13 @@ import org.springframework.stereotype.Service;
 import com.devcru.journowatch.api.daoimpl.RatingDaoImpl;
 import com.devcru.journowatch.api.objects.Rating;
 
+/**
+ * @author Monitored We are going to make use of a "Service layer" this time
+ *         around to separate business logic from the presentation layer
+ *         (Controllers)
+ *
+ */
+
 @Service
 public class RatingService {
 	
@@ -46,5 +53,7 @@ public class RatingService {
 	/*
 	 * Supporting business-logic stuff
 	 */
+
+	// Nothing yet.
 
 }

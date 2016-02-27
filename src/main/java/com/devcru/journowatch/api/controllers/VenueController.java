@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.devcru.journowatch.api.objects.Partnership;
 import com.devcru.journowatch.api.objects.Venue;
+import com.devcru.journowatch.api.services.PartnershipService;
 import com.devcru.journowatch.api.services.VenueService;
 
 @Controller
@@ -18,12 +20,14 @@ import com.devcru.journowatch.api.services.VenueService;
 public class VenueController {
 	
 	@Autowired
-	private VenueService venueService;
+	private VenueService venueServ;
+	@Autowired
+	private PartnershipService partnershipServ;
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
 	@ResponseBody
 	public boolean createService(@RequestBody Venue venue) {
-		boolean isSuccess = venueService.createVenue(venue);
+		boolean isSuccess = venueServ.createVenue(venue);
 		return isSuccess;
 	}
 	
@@ -32,7 +36,7 @@ public class VenueController {
 	public Venue getVenue(@PathVariable("vuuid") UUID uuid) {
 		Venue venue = new Venue();
 		venue.setUuid(uuid);
-		venue = venueService.getVenue(venue);
+		venue = venueServ.getVenue(venue);
 		return venue;
 	}
 	
@@ -40,7 +44,7 @@ public class VenueController {
 	@ResponseBody
 	public boolean updateVenue(@PathVariable("vuuid") UUID uuid, @RequestBody Venue venue) {
 		venue.setUuid(uuid);
-		boolean isSuccess = venueService.updateVenue(venue);
+		boolean isSuccess = venueServ.updateVenue(venue);
 		return isSuccess;
 	}
 	
@@ -49,8 +53,20 @@ public class VenueController {
 	public boolean deleteVenue(@PathVariable("vuuid") UUID uuid) {
 		Venue venue = new Venue();
 		venue.setUuid(uuid);
-		boolean isSuccess = venueService.deleteVenue(venue);
+		boolean isSuccess = venueServ.deleteVenue(venue);
 		return isSuccess;
+	}
+	
+	/* Supporting endpoints */
+	
+	@RequestMapping(value="/{vuuid}/journo/{juuid}", method=RequestMethod.GET)
+	@ResponseBody
+	public Partnership getPartnership(@PathVariable("vuuid") UUID vuuid, @PathVariable("juuid") UUID juuid) {		
+		Partnership partnership = new Partnership();
+		partnership.setJournouuid(juuid);
+		partnership.setVenueuuid(vuuid);
+		partnership = partnershipServ.getPartnership(partnership);
+		return partnership;
 	}
 
 }
