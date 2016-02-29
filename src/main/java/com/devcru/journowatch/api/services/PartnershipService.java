@@ -1,7 +1,11 @@
 package com.devcru.journowatch.api.services;
 
+import java.util.LinkedList;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.devcru.journowatch.api.daoimpl.PartnershipDaoImpl;
 import com.devcru.journowatch.api.objects.Partnership;
@@ -47,6 +51,10 @@ public class PartnershipService {
 	 * Supporting business-logic stuff
 	 */
 
-	// Nothing yet.
+	public LinkedList<Partnership> getPartnerships(Partnership partnership) {
+		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
+		partnerships = pd.getPartnershipsForVenue(partnership);
+		return partnerships;
+	}
 
 }

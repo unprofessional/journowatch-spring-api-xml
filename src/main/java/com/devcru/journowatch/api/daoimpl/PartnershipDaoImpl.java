@@ -2,6 +2,7 @@ package com.devcru.journowatch.api.daoimpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -135,6 +136,43 @@ public class PartnershipDaoImpl implements PartnershipDao {
 		}
 		
 		return isSuccess;
+	}
+	
+	/* Supporting */
+	
+	/*
+	 * (non-Javadoc)
+	 * Gets all partnership records for a venue via the venueuuid
+	 * i.e. to show us all journos who have worked for a venue in any capacity
+	 */
+	@Override
+	public LinkedList<Partnership> getPartnershipsForVenue(Partnership partnership) {
+		
+		String sql = "SELECT * FROM partnerships WHERE venueuuid = ?";
+		
+		UUID venueuuid = partnership.getVenueuuid();
+		
+		List<Map<String, Object>> rows = null;
+		
+		try {
+			rows = template.queryForList(sql, new Object[]{venueuuid});
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		//Partnership[] partnerships = null;
+		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
+		
+		for(Map<String, Object> row : rows) {
+			Partnership pship = new Partnership();
+			pship.setUuid((UUID)row.get("uuid"));
+			pship.setJournouuid((UUID)row.get("journouuid"));
+			pship.setVenueuuid((UUID)row.get("venueuuid"));
+			pship.setType((int)row.get("type"));
+			partnerships.add(pship);
+		}
+		
+		return partnerships;
 	}
 
 }

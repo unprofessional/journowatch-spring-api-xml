@@ -1,14 +1,10 @@
 package com.devcru.journowatch.api.controllers;
 
 import com.devcru.journowatch.api.constants.Constants;
+import com.devcru.journowatch.api.objects.Rating;
 import com.devcru.journowatch.api.objects.User;
+import com.devcru.journowatch.api.services.RatingService;
 import com.devcru.journowatch.api.services.UserService;
-
-import freemarker.core.ParseException;
-import freemarker.template.Configuration;
-import freemarker.template.MalformedTemplateNameException;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import static org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString;
-
-import java.io.IOException;
+import java.util.UUID;
 
 /**
  * Created by Monitored on 12/25/2015.
@@ -51,12 +45,11 @@ public class UserController {
 	
 	@Autowired
 	private UserService userServ;
+	@Autowired
+	private RatingService ratingServ;
 	
-	/* 
-	 * TODO:
-	 * We are beginning work on abstracting the REST API out into its own resource layer
-	 * The front-end web-client layer is being developed as a separate project
-	 * Therefore, we can get rid of these FTL references soon
+	/*
+	 * CRUD endpooints
 	 */
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
@@ -123,9 +116,15 @@ public class UserController {
 		return status + "";
 		// ??? return JsonResponse;
 	}
+	
+	/* 
+	 * Supporting endpoints 
+	 */
     
     @ResponseStatus(value=HttpStatus.OK)
-    // TODO: Test this to see if this gets sent along with a successful 200 OK
+    // Test this to see if this gets sent along with a successful 200 OK
+    // Tested.  Shit doesn't seem to work.
+    // TODO: Consider removing and replacing feedback with JSONResponse Objects
     public String okay() {
     	System.out.println(">>>>>>>>>>>>>>>: OKAY!");
     	return "HPOASGBJHSJHDFGGJHSD";
@@ -143,6 +142,16 @@ public class UserController {
     	// XXX: Still not sure if this method will be necessary....
     	// most likely belongs in Service Class if so, anyway
         return null;
+    }
+    
+    @RequestMapping(value="/{ouuid}/journo/{juuid]", method=RequestMethod.GET)
+    @ResponseBody
+    public Rating getRating(@PathVariable("ouuid") UUID ouuid, @PathVariable("juuid") UUID juuid) {
+    	Rating rating = new Rating();
+    	rating.setOwneruuid(ouuid);
+    	rating.setJournouuid(juuid);
+    	rating = ratingServ.getRating(rating); 
+    	return rating;
     }
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.devcru.journowatch.api.constants.Constants;
 import com.devcru.journowatch.api.objects.Journo;
 import com.devcru.journowatch.api.objects.Partnership;
+import com.devcru.journowatch.api.objects.Rating;
 import com.devcru.journowatch.api.services.JournoService;
 import com.devcru.journowatch.api.services.PartnershipService;
 
@@ -98,6 +99,17 @@ public class JournoController {
 	
 	/* Supporting endponts */
 	
+	@RequestMapping(value="/{juuid}/venues", method=RequestMethod.GET)
+	@ResponseBody
+	public Partnership[] getPartnership(@PathVariable("juuid") UUID juuid) {
+		// For ALL partnerships?
+		// This means we will need new methods elsewhere
+		// For now, focus on the User-centric model to get the rating a
+		// User submitted for a Journo
+		Partnership[] partnerships = null;
+		return partnerships;
+	}
+	
 	@RequestMapping(value="/{juuid}/venue/{vuuid}", method=RequestMethod.GET)
 	@ResponseBody
 	public Partnership getPartnership(@PathVariable("juuid") UUID juuid, @PathVariable("vuuid") UUID vuuid) {		
@@ -106,6 +118,15 @@ public class JournoController {
 		partnership.setVenueuuid(vuuid);
 		partnership = partnershipServ.getPartnership(partnership);
 		return partnership;
+	}
+	
+	// TODO: Ratings?
+	
+	@RequestMapping(value="/juuid/ratings", method=RequestMethod.GET)
+	@ResponseBody
+	public Rating[] getRatings(@PathVariable("") UUID uuid) {
+		Rating[] rating = null;
+		return rating;
 	}
 
 }

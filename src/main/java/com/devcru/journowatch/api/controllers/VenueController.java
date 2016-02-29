@@ -1,5 +1,6 @@
 package com.devcru.journowatch.api.controllers;
 
+import java.util.LinkedList;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,16 @@ public class VenueController {
 		partnership.setVenueuuid(vuuid);
 		partnership = partnershipServ.getPartnership(partnership);
 		return partnership;
+	}
+	
+	@RequestMapping(value="/{vuuid}/partnerships", method=RequestMethod.GET)
+	@ResponseBody
+	public LinkedList<Partnership> getPartnerships(@PathVariable("vuuid") UUID vuuid) {
+		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
+		Partnership partnership = new Partnership();
+		partnership.setVenueuuid(vuuid);
+		partnerships = partnershipServ.getPartnerships(partnership);
+		return partnerships;
 	}
 
 }
