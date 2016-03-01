@@ -38,7 +38,7 @@ public class JournoRatingDaoImpl implements JournoRatingDao {
 	@Override
 	public boolean createRating(JournoRating journorating) {
 		
-		System.out.println("RDI > reached!");
+		System.out.println("JRDI > reached!");
 		
 		boolean isSuccess = false;
 
@@ -49,12 +49,12 @@ public class JournoRatingDaoImpl implements JournoRatingDao {
 		int score = journorating.getScore();
 		String comment = journorating.getComment();
 		
-		System.out.println("RDI > journorating.getUuid: " + journorating.getUuid());
-		System.out.println("RDI > journorating.getTimestamp: " + journorating.getTimestamp());
-		System.out.println("RDI > journorating.getOwner: " + journorating.getOwneruuid());
-		System.out.println("RDI" + journorating.getJournouuid());
-		System.out.println("RDI > journorating.getScore: " + journorating.getScore());
-		System.out.println("RDI > journorating.getComment: " + journorating.getComment());
+		System.out.println("JRDI > journorating.getUuid: " + journorating.getUuid());
+		System.out.println("JRDI > journorating.getTimestamp: " + journorating.getTimestamp());
+		System.out.println("JRDI > journorating.getOwneruuid: " + journorating.getOwneruuid());
+		System.out.println("JRDI > journorating.getJournouuid: " + journorating.getJournouuid());
+		System.out.println("JRDI > journorating.getScore: " + journorating.getScore());
+		System.out.println("JRDI > journorating.getComment: " + journorating.getComment());
 
 		try {
 			template.update(sql, new Object[] { owneruuid, journouuid, score, comment });
@@ -64,7 +64,7 @@ public class JournoRatingDaoImpl implements JournoRatingDao {
 			e.printStackTrace();
 		}
 		
-		System.out.println("RDI > isSuccess: " + isSuccess);
+		System.out.println("JRDI > isSuccess: " + isSuccess);
 
 		return isSuccess;
 	}
