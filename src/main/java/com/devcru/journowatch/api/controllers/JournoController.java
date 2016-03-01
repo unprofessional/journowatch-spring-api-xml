@@ -119,9 +119,9 @@ public class JournoController {
 		return partnership;
 	}
 	
-	// TODO: Ratings?
+	// TODO: journoratings?
 	
-	@RequestMapping(value="/juuid/ratings", method=RequestMethod.GET)
+	@RequestMapping(value="/juuid/journoratings", method=RequestMethod.GET)
 	@ResponseBody
 	public LinkedList<JournoRating> getRatings(@PathVariable("") UUID uuid) {
 		LinkedList<JournoRating> journorating = null;
