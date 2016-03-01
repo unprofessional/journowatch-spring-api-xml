@@ -47,9 +47,9 @@ WITH (
 	OIDS=FALSE
 );
 
--- Table: ratings
-DROP TABLE ratings;
-CREATE TABLE ratings
+-- Table: journoratings
+DROP TABLE journoratings;
+CREATE TABLE journoratings
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	"timestamp" timestamp with time zone NOT NULL DEFAULT now(),

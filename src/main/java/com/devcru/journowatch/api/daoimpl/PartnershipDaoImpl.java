@@ -146,21 +146,25 @@ public class PartnershipDaoImpl implements PartnershipDao {
 	 * i.e. to show us all journos who have worked for a venue in any capacity
 	 */
 	@Override
-	public LinkedList<Partnership> getPartnershipsForVenue(Partnership partnership) {
+	public LinkedList<Partnership> getPartnerships(Partnership partnership) {
 		
-		String sql = "SELECT * FROM partnerships WHERE venueuuid = ?";
+		String sqlJournoUuid = "SELECT * FROM partnerships WHERE journouuid = ?";
+		String sqlVenueUuid = "SELECT * FROM partnerships WHERE venueuuid = ?";
 		
+		UUID journouuid = partnership.getJournouuid();
 		UUID venueuuid = partnership.getVenueuuid();
 		
 		List<Map<String, Object>> rows = null;
 		
 		try {
-			rows = template.queryForList(sql, new Object[]{venueuuid});
+			rows = template.queryForList(
+				(journouuid != null ? sqlJournoUuid : sqlVenueUuid),
+				(journouuid != null ? journouuid : venueuuid)
+			);
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
 		
-		//Partnership[] partnerships = null;
 		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
 		
 		for(Map<String, Object> row : rows) {

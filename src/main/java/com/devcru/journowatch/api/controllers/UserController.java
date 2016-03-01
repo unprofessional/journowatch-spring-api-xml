@@ -1,9 +1,9 @@
 package com.devcru.journowatch.api.controllers;
 
 import com.devcru.journowatch.api.constants.Constants;
-import com.devcru.journowatch.api.objects.Rating;
+import com.devcru.journowatch.api.objects.JournoRating;
 import com.devcru.journowatch.api.objects.User;
-import com.devcru.journowatch.api.services.RatingService;
+import com.devcru.journowatch.api.services.JournoRatingService;
 import com.devcru.journowatch.api.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +46,7 @@ public class UserController {
 	@Autowired
 	private UserService userServ;
 	@Autowired
-	private RatingService ratingServ;
+	private JournoRatingService ratingServ;
 	
 	/*
 	 * CRUD endpooints
@@ -146,12 +146,12 @@ public class UserController {
     
     @RequestMapping(value="/{ouuid}/journo/{juuid]", method=RequestMethod.GET)
     @ResponseBody
-    public Rating getRating(@PathVariable("ouuid") UUID ouuid, @PathVariable("juuid") UUID juuid) {
-    	Rating rating = new Rating();
-    	rating.setOwneruuid(ouuid);
-    	rating.setJournouuid(juuid);
-    	rating = ratingServ.getRating(rating); 
-    	return rating;
+    public JournoRating getRating(@PathVariable("ouuid") UUID ouuid, @PathVariable("juuid") UUID juuid) {
+    	JournoRating journorating = new JournoRating();
+    	journorating.setOwneruuid(ouuid);
+    	journorating.setJournouuid(juuid);
+    	journorating = ratingServ.getRating(journorating); 
+    	return journorating;
     }
 
 }

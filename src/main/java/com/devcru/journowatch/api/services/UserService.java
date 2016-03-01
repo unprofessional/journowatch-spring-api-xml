@@ -82,7 +82,7 @@ public class UserService {
 	 * TODO: User operations public static void verifyCredentials(User user) {
 	 * //... }
 	 * 
-	 * public static void submitRating(User user, Rating rating, Journo journo)
+	 * public static void submitRating(User user, journorating journorating, Journo journo)
 	 * { //... }
 	 * 
 	 * public static void doSomethingElse() {}

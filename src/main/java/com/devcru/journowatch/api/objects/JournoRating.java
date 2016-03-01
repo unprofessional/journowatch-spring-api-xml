@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Rating {
+public class JournoRating {
 
 	// TODO: Consider making a status field
 
@@ -14,7 +14,7 @@ public class Rating {
 	@JsonProperty("timestamp")
 	private Timestamp timestamp;
 	@JsonProperty("owneruuid")
-	private UUID owneruuid; // UUID of the user who owns this rating
+	private UUID owneruuid; // UUID of the user who owns this journorating
 	@JsonProperty("journouuid")
 	private UUID journouuid; // UUID of the journo for whom this applies
 	@JsonProperty("score")

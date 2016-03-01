@@ -53,7 +53,7 @@ public class PartnershipService {
 
 	public LinkedList<Partnership> getPartnerships(Partnership partnership) {
 		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
-		partnerships = pd.getPartnershipsForVenue(partnership);
+		partnerships = pd.getPartnerships(partnership);
 		return partnerships;
 	}
 

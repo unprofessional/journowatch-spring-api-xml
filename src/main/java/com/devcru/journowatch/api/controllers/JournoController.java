@@ -1,5 +1,6 @@
 package com.devcru.journowatch.api.controllers;
 
+import java.util.LinkedList;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.devcru.journowatch.api.constants.Constants;
 import com.devcru.journowatch.api.objects.Journo;
 import com.devcru.journowatch.api.objects.Partnership;
-import com.devcru.journowatch.api.objects.Rating;
+import com.devcru.journowatch.api.objects.JournoRating;
 import com.devcru.journowatch.api.services.JournoService;
 import com.devcru.journowatch.api.services.PartnershipService;
 
@@ -39,7 +40,6 @@ import com.devcru.journowatch.api.services.PartnershipService;
 		},
 		allowedHeaders = "*" // TODO: Find the minimum-required headers necessary instead of allowing all
 )
-
 @RequestMapping(value="/journo/*")
 public class JournoController {
 	
@@ -101,12 +101,11 @@ public class JournoController {
 	
 	@RequestMapping(value="/{juuid}/venues", method=RequestMethod.GET)
 	@ResponseBody
-	public Partnership[] getPartnership(@PathVariable("juuid") UUID juuid) {
-		// For ALL partnerships?
-		// This means we will need new methods elsewhere
-		// For now, focus on the User-centric model to get the rating a
-		// User submitted for a Journo
-		Partnership[] partnerships = null;
+	public LinkedList<Partnership> getPartnership(@PathVariable("juuid") UUID juuid) {
+		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
+		Partnership partnership = new Partnership();
+		partnership.setJournouuid(juuid);
+		partnershipServ.getPartnerships(partnership);
 		return partnerships;
 	}
 	
@@ -124,9 +123,9 @@ public class JournoController {
 	
 	@RequestMapping(value="/juuid/ratings", method=RequestMethod.GET)
 	@ResponseBody
-	public Rating[] getRatings(@PathVariable("") UUID uuid) {
-		Rating[] rating = null;
-		return rating;
+	public LinkedList<JournoRating> getRatings(@PathVariable("") UUID uuid) {
+		LinkedList<JournoRating> journorating = null;
+		return journorating;
 	}
 
 }
