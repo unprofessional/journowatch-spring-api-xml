@@ -52,7 +52,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="ratingDao" class="com.devcru.journowatch.api.daoimpl.RatingDaoImpl">
+	<bean id="journoRatingDao" class="com.devcru.journowatch.api.daoimpl.JournoRatingDaoImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
