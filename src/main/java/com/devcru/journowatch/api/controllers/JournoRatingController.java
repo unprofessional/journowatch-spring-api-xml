@@ -40,20 +40,22 @@ import com.devcru.journowatch.api.services.JournoRatingService;
 public class JournoRatingController {
 	
 	@Autowired
-	private JournoRatingService ratingServ;
+	private JournoRatingService journoRatingServ;
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody
 	public boolean createRating(@RequestBody JournoRating journorating) {
 		
-		System.out.println("RC > journorating.getUuid: " + journorating.getUuid());
-		System.out.println("RC > journorating.getTimestamp: " + journorating.getTimestamp());
-		System.out.println("RC > journorating.getOwner: " + journorating.getOwneruuid());
-		System.out.println("RC > journorating.getJourno: " + journorating.getJournouuid());
-		System.out.println("RC > journorating.getScore: " + journorating.getScore());
-		System.out.println("RC > journorating.getComment: " + journorating.getComment());
+		System.out.println("JRC > journorating.getUuid: " + journorating.getUuid());
+		System.out.println("JRC > journorating.getTimestamp: " + journorating.getTimestamp());
+		System.out.println("JRC > journorating.getStatus: " + journorating.getStatus());
+		System.out.println("JRC > journorating.getOwner: " + journorating.getOwneruuid());
+		System.out.println("JRC > journorating.getJourno: " + journorating.getJournouuid());
+		System.out.println("JRC > journorating.getScore: " + journorating.getScore());
+		System.out.println("JRC > journorating.getHeadline: " + journorating.getHeadline());
+		System.out.println("JRC > journorating.getComment: " + journorating.getComment());
 		
-		boolean isSuccess = ratingServ.createRating(journorating);
+		boolean isSuccess = journoRatingServ.createRating(journorating);
 		return isSuccess;
 	}
 	
@@ -62,7 +64,7 @@ public class JournoRatingController {
 	public JournoRating getRating(@PathVariable("ratinguuid") UUID uuid) {
 		JournoRating journorating = new JournoRating();
 		journorating.setUuid(uuid);
-		journorating = ratingServ.getRating(journorating); // Will need to get it via UUID
+		journorating = journoRatingServ.getRating(journorating); // Will need to get it via UUID
 		return journorating;
 	}
 	
@@ -75,7 +77,7 @@ public class JournoRatingController {
 		journorating.setOwneruuid(ouuid);
 		journorating.setJournouuid(juuid);
 		
-		ratingServ.getRating(journorating);
+		journoRatingServ.getRating(journorating);
 		
 		return journorating;
 	}
@@ -84,7 +86,7 @@ public class JournoRatingController {
 	@ResponseBody
 	public boolean updateRating(@PathVariable("ratinguuid") UUID uuid, @RequestBody JournoRating journorating) {
 		journorating.setUuid(uuid);
-		boolean isSuccess = ratingServ.updateRating(journorating);
+		boolean isSuccess = journoRatingServ.updateRating(journorating);
 		return isSuccess;
 	}
 	
@@ -93,7 +95,7 @@ public class JournoRatingController {
 	public boolean deleteRating(@PathVariable("ratinguuid") UUID uuid) {
 		JournoRating journorating = new JournoRating();
 		journorating.setUuid(uuid);
-		boolean isSuccess = ratingServ.deleteRating(journorating);
+		boolean isSuccess = journoRatingServ.deleteRating(journorating);
 		return isSuccess;
 	}
 

@@ -17,7 +17,7 @@ import com.devcru.journowatch.api.objects.JournoRating;
 public class JournoRatingService {
 	
 	@Autowired
-	private JournoRatingDaoImpl rd;
+	private JournoRatingDaoImpl jrd;
 	
 	/*
 	 * CRUD stuff
@@ -25,28 +25,30 @@ public class JournoRatingService {
 	
 	public boolean createRating(JournoRating journorating) {
 		
-		System.out.println("RS > journorating.getUuid: " + journorating.getUuid());
-		System.out.println("RS > journorating.getTimestamp: " + journorating.getTimestamp());
-		System.out.println("RS > journorating.getOwner: " + journorating.getOwneruuid());
-		System.out.println("RS > journorating.getJourno: " + journorating.getJournouuid());
-		System.out.println("RS > journorating.getScore: " + journorating.getScore());
-		System.out.println("RS > journorating.getComment: " + journorating.getComment());
+		System.out.println("JRS > journorating.getUuid: " + journorating.getUuid());
+		System.out.println("JRS > journorating.getTimestamp: " + journorating.getTimestamp());
+		System.out.println("JRS > journorating.getStatus: " + journorating.getStatus());
+		System.out.println("JRS > journorating.getOwner: " + journorating.getOwneruuid());
+		System.out.println("JRS > journorating.getJourno: " + journorating.getJournouuid());
+		System.out.println("JRS > journorating.getScore: " + journorating.getScore());
+		System.out.println("JRS > journorating.getHeadline: " + journorating.getHeadline());
+		System.out.println("JRS > journorating.getComment: " + journorating.getComment());
 		
-		boolean status = rd.createRating(journorating);
+		boolean status = jrd.createRating(journorating);
 		return status;
 	}
 	
 	public JournoRating getRating(JournoRating journorating) {
-		return rd.getRating(journorating);
+		return jrd.getRating(journorating);
 	}
 	
 	public boolean updateRating(JournoRating journorating) {
-		boolean status = rd.updateRating(journorating);
+		boolean status = jrd.updateRating(journorating);
 		return status;
 	}
 	
 	public boolean deleteRating(JournoRating journorating) {
-		boolean status = rd.deleteRating(journorating);
+		boolean status = jrd.deleteRating(journorating);
 		return status;
 	}
 	

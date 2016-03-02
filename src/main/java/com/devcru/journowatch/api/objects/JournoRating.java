@@ -13,12 +13,16 @@ public class JournoRating {
 	private UUID uuid;
 	@JsonProperty("timestamp")
 	private Timestamp timestamp;
+	@JsonProperty("status") // user banned/inactive/deleted, etc
+	private int status;
 	@JsonProperty("owneruuid")
 	private UUID owneruuid; // UUID of the user who owns this journorating
 	@JsonProperty("journouuid")
 	private UUID journouuid; // UUID of the journo for whom this applies
 	@JsonProperty("score")
 	private int score; // (1-100?)
+	@JsonProperty("headline")
+	private String headline;
 	@JsonProperty("comment")
 	private String comment;
 
@@ -36,6 +40,14 @@ public class JournoRating {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	public UUID getOwneruuid() {
@@ -60,6 +72,14 @@ public class JournoRating {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getHeadline() {
+		return headline;
+	}
+
+	public void setHeadline(String headline) {
+		this.headline = headline;
 	}
 
 	public String getComment() {

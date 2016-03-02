@@ -42,22 +42,26 @@ public class JournoRatingDaoImpl implements JournoRatingDao {
 		
 		boolean isSuccess = false;
 
-		String sql = "INSERT INTO journoratings (owneruuid, journouuid, score, comment) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO journoratings (status, owneruuid, journouuid, score, headline, comment) VALUES (?, ?, ?, ?, ?, ?)";
 
+		int status = journorating.getStatus();
 		UUID owneruuid = journorating.getOwneruuid();
 		UUID journouuid = journorating.getJournouuid();
 		int score = journorating.getScore();
+		String headline = journorating.getHeadline();
 		String comment = journorating.getComment();
 		
 		System.out.println("JRDI > journorating.getUuid: " + journorating.getUuid());
 		System.out.println("JRDI > journorating.getTimestamp: " + journorating.getTimestamp());
+		System.out.println("JRDI > journorating.getStatus: " + journorating.getStatus());
 		System.out.println("JRDI > journorating.getOwneruuid: " + journorating.getOwneruuid());
 		System.out.println("JRDI > journorating.getJournouuid: " + journorating.getJournouuid());
 		System.out.println("JRDI > journorating.getScore: " + journorating.getScore());
+		System.out.println("JRDI > journorating.getHeadline: " + journorating.getHeadline());
 		System.out.println("JRDI > journorating.getComment: " + journorating.getComment());
 
 		try {
-			template.update(sql, new Object[] { owneruuid, journouuid, score, comment });
+			template.update(sql, new Object[] { status, owneruuid, journouuid, score, headline, comment });
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;
@@ -93,9 +97,11 @@ public class JournoRatingDaoImpl implements JournoRatingDao {
 		for(Map<String, Object> row : rows) {
 			journorating.setUuid((UUID)row.get("uuid"));
 			journorating.setTimestamp((Timestamp)row.get("timestamp"));
+			journorating.setStatus((int)row.get("status"));
 			journorating.setOwneruuid((UUID)row.get("owneruuid"));
 			journorating.setJournouuid((UUID)row.get("journouuid"));
 			journorating.setScore((int)row.get("score"));
+			journorating.setHeadline((String)row.get("headline"));
 			journorating.setComment((String)row.get("comment"));
 		}
 		
@@ -106,16 +112,19 @@ public class JournoRatingDaoImpl implements JournoRatingDao {
 	public boolean updateRating(JournoRating journorating) {
 		boolean isSuccess = false;
 
-		String sql = "UPDATE journoratings SET owneruuid = ?, journouuid = ?, score = ?, comment = ? WHERE uuid = ?";
+		String sql = "UPDATE journoratings SET status = ?, owneruuid = ?, journouuid = ?, "
+				+ "score = ?, headline = ?, comment = ? WHERE uuid = ?";
 
+		int status = journorating.getStatus();
 		UUID uuid = journorating.getUuid();
 		UUID owneruuid = journorating.getOwneruuid();
 		UUID journouuid = journorating.getJournouuid();
 		int score = journorating.getScore();
+		String headline = journorating.getHeadline();
 		String comment = journorating.getComment();
 
 		try {
-			template.update(sql, new Object[] { owneruuid, journouuid, score, comment, uuid });
+			template.update(sql, new Object[] { status, owneruuid, journouuid, score, headline, comment, uuid });
 			isSuccess = true;
 		} catch (DataAccessException e) {
 			isSuccess = false;

@@ -53,9 +53,11 @@ CREATE TABLE journoratings
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	"timestamp" timestamp with time zone NOT NULL DEFAULT now(),
+	status integer, -- user banned/inactive/deleted, etc
 	owneruuid uuid,
 	journouuid uuid,
 	score integer NOT NULL DEFAULT (-1),
+	headline character varying(128),
 	comment character varying(1024),
 	CONSTRAINT ratings_pkey PRIMARY KEY (uuid)
 )
