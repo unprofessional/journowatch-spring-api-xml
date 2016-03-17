@@ -146,7 +146,7 @@ public class PartnershipDaoImpl implements PartnershipDao {
 	 * i.e. to show us all journos who have worked for a venue in any capacity
 	 */
 	@Override
-	public LinkedList<Partnership> getPartnerships(Partnership partnership) {
+	public LinkedList<Partnership> getAllPartnerships(Partnership partnership) {
 		
 		String sqlJournoUuid = "SELECT * FROM partnerships WHERE journouuid = ?";
 		String sqlVenueUuid = "SELECT * FROM partnerships WHERE venueuuid = ?";

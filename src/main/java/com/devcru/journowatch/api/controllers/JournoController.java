@@ -105,7 +105,7 @@ public class JournoController {
 		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
 		Partnership partnership = new Partnership();
 		partnership.setJournouuid(juuid);
-		partnershipServ.getPartnerships(partnership);
+		partnershipServ.getAllPartnerships(partnership);
 		return partnerships;
 	}
 	

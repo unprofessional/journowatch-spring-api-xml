@@ -2,6 +2,7 @@ package com.devcru.journowatch.api.daoimpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -141,5 +142,35 @@ public class VenueDaoImpl implements VenueDao {
 	}
 	
 	/* Helper methods */
+	
+	@Override
+	public LinkedList<Venue> getAllVenues() {
+		LinkedList<Venue> venues = new LinkedList<Venue>();
+		
+		String sql = "SELECT * FROM venues";
+		// TODO: Need to LIMIT for pagination... find out more later
+		
+		List<Map<String, Object>> rows = null;
+		
+		try {
+			rows = template.queryForList(sql);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		for(Map<String, Object> row : rows) {
+			Venue venue = new Venue();
+			
+			venue.setUuid((UUID)row.get("uuid"));
+			venue.setName((String)row.get("name"));
+			venue.setStatus((int)row.get("status"));
+			venue.setOverallscore((int)row.get("overallscore"));
+			venue.setBio((String)row.get("bio"));
+			
+			venues.add(venue);
+		}
+		
+		return venues;
+	}
 
 }

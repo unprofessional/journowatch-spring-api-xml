@@ -51,9 +51,9 @@ public class PartnershipService {
 	 * Supporting business-logic stuff
 	 */
 
-	public LinkedList<Partnership> getPartnerships(Partnership partnership) {
+	public LinkedList<Partnership> getAllPartnerships(Partnership partnership) {
 		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
-		partnerships = pd.getPartnerships(partnership);
+		partnerships = pd.getAllPartnerships(partnership);
 		return partnerships;
 	}
 

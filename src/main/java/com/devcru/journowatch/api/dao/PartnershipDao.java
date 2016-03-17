@@ -16,6 +16,6 @@ public interface PartnershipDao {
 	
 	/* Supporting */
 	
-	public LinkedList<Partnership> getPartnerships(Partnership partnership);
+	public LinkedList<Partnership> getAllPartnerships(Partnership partnership);
 
 }

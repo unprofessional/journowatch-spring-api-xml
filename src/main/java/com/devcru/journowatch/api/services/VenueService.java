@@ -1,5 +1,7 @@
 package com.devcru.journowatch.api.services;
 
+import java.util.LinkedList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,16 @@ public class VenueService {
 	public boolean deleteVenue(Venue venue) {
 		boolean isSuccess = vd.deleteVenue(venue);
 		return isSuccess;
+	}
+	
+	/* Supporting methods */
+	
+	public LinkedList<Venue> getAllVenues() {
+		LinkedList<Venue> venues = new LinkedList<Venue>();
+		
+		venues = vd.getAllVenues();
+		
+		return venues;
 	}
 
 	/*

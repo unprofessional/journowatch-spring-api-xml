@@ -98,8 +98,20 @@ public class VenueController {
 		LinkedList<Partnership> partnerships = new LinkedList<Partnership>();
 		Partnership partnership = new Partnership();
 		partnership.setVenueuuid(vuuid);
-		partnerships = partnershipServ.getPartnerships(partnership);
+		partnerships = partnershipServ.getAllPartnerships(partnership);
 		return partnerships;
+	}
+	
+	// FIXME: Find out a better URI convention for "get all" requests
+	@RequestMapping(value="/all", method=RequestMethod.GET)
+	@ResponseBody
+	public LinkedList<Venue> showAllVenues() {
+		
+		LinkedList<Venue> venues = new LinkedList<Venue>();
+		
+		venues = venueServ.getAllVenues();
+		
+		return venues;
 	}
 
 }
