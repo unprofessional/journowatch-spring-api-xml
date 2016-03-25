@@ -2,6 +2,7 @@ package com.devcru.journowatch.api.daoimpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class JournoDaoImpl implements JournoDao {
 		
 		String fullname = journo.getFullname();
 		int overallscore = journo.getOverallScore();
-		String status = journo.getStatus();
+		int status = journo.getStatus();
 		String bio = journo.getBio();
 		
 		try {
@@ -87,7 +88,7 @@ public class JournoDaoImpl implements JournoDao {
 		for(Map<String, Object> row : rows) {
 			journo.setFullname((String)row.get("fullname"));
 			journo.setOverallScore((int)row.get("overallscore"));
-			journo.setStatus((String)row.get("status"));
+			journo.setStatus((int)row.get("status"));
 			journo.setBio((String)row.get("bio"));
 		}
 		
@@ -101,7 +102,7 @@ public class JournoDaoImpl implements JournoDao {
 		
 		UUID uuid = journo.getUuid();
 		String fullname = journo.getFullname();
-		String status = journo.getStatus();
+		int status = journo.getStatus();
 		String bio = journo.getBio();
 		int overallscore = journo.getOverallScore();
 		
@@ -133,6 +134,31 @@ public class JournoDaoImpl implements JournoDao {
 		}
 		
 		return isSuccess;
+	}
+
+	@Override
+	public LinkedList<Journo> getAllJournos() {
+		String sql = "SELECT * FROM journos";
+		
+		LinkedList<Journo> journos = new LinkedList<Journo>();
+		List<Map<String,Object>> rows = null;
+		
+		try {
+			rows = template.queryForList(sql);
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		
+		for(Map<String,Object> row : rows) {
+			Journo journo = new Journo();
+			journo.setUuid((UUID)row.get("uuid"));
+			journo.setFullname((String)row.get("fullname"));
+			journo.setStatus((int)row.get("status"));
+			journo.setOverallScore((int)row.get("overallscore"));
+			journo.setBio((String)row.get("bio"));
+		}
+		
+		return journos;
 	}
 
 }

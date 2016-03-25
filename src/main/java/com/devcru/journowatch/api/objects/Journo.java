@@ -15,7 +15,7 @@ public class Journo {
 	@JsonProperty("fullname")
 	private String fullname = null;
 	@JsonProperty("status")
-	private String status = null; // enum?
+	private int status = -1; // enum?
 	@JsonProperty("bio")
 	private String bio = null;
 	@JsonProperty("overallscore")
@@ -37,11 +37,11 @@ public class Journo {
 		this.fullname = fullname;
 	}
 
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 

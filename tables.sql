@@ -39,7 +39,7 @@ CREATE TABLE venues
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	name character varying(16) NOT NULL,
-	status character varying(32), -- integer NOT NULL DEFAULT -1, ???
+	status integer, -- -1 is unknown, 0 is inactive, 1 is active
 	overallscore integer NOT NULL DEFAULT -1,
 	bio character varying(2048)
 )

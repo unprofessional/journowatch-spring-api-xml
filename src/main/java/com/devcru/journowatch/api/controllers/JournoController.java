@@ -54,7 +54,7 @@ public class JournoController {
 		
 		// DEBUG BEGIN
 		String fullname = journo.getFullname();
-		String status = journo.getStatus();
+		int status = journo.getStatus();
 		int overallscore = journo.getOverallScore();
 		String bio = journo.getBio();
 
@@ -119,13 +119,21 @@ public class JournoController {
 		return partnership;
 	}
 	
-	// TODO: journoratings?
+	// TODO: all journoratings?
 	
 	@RequestMapping(value="/juuid/journoratings", method=RequestMethod.GET)
 	@ResponseBody
 	public LinkedList<JournoRating> getRatings(@PathVariable("") UUID uuid) {
 		LinkedList<JournoRating> journorating = null;
 		return journorating;
+	}
+	
+	@RequestMapping(value="all", method=RequestMethod.GET)
+	@ResponseBody
+	public LinkedList<Journo> getAllJournos() {
+		LinkedList<Journo> journos = new LinkedList<Journo>();
+		//journos = journoServ.getAllJournos();
+		return journos;
 	}
 
 }

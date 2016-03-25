@@ -27,7 +27,7 @@ public class JournoService {
 
 		// DEBUG BEGIN
 		String fullname = journo.getFullname();
-		String status = journo.getStatus();
+		int status = journo.getStatus();
 		int overallscore = journo.getOverallScore();
 		String bio = journo.getBio();
 
