@@ -1,10 +1,13 @@
 package com.devcru.journowatch.api.services;
 
+import java.util.LinkedList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devcru.journowatch.api.daoimpl.JournoDaoImpl;
 import com.devcru.journowatch.api.objects.Journo;
+import com.devcru.journowatch.api.objects.Venue;
 
 /**
  * @author Monitored We are going to make use of a "Service layer" this time
@@ -58,6 +61,16 @@ public class JournoService {
 	public boolean deleteJourno(Journo journo) {
 		boolean isSuccess = jd.deleteJourno(journo);
 		return isSuccess;
+	}
+	
+	/* Supporting methods */
+	
+	public LinkedList<Journo> getAllJournos() {
+		LinkedList<Journo> journos = new LinkedList<Journo>();
+		
+		journos = jd.getAllJournos();
+		
+		return journos;
 	}
 	
 	/*

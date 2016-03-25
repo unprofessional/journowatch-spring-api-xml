@@ -132,7 +132,7 @@ public class JournoController {
 	@ResponseBody
 	public LinkedList<Journo> getAllJournos() {
 		LinkedList<Journo> journos = new LinkedList<Journo>();
-		//journos = journoServ.getAllJournos();
+		journos = journoServ.getAllJournos();
 		return journos;
 	}
 
