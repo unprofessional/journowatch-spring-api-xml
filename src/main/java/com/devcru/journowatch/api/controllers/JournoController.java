@@ -128,7 +128,7 @@ public class JournoController {
 		return journorating;
 	}
 	
-	@RequestMapping(value="all", method=RequestMethod.GET)
+	@RequestMapping(value="/all", method=RequestMethod.GET)
 	@ResponseBody
 	public LinkedList<Journo> getAllJournos() {
 		LinkedList<Journo> journos = new LinkedList<Journo>();
