@@ -138,9 +138,11 @@ public class JournoDaoImpl implements JournoDao {
 
 	@Override
 	public LinkedList<Journo> getAllJournos() {
-		String sql = "SELECT * FROM journos";
-		
 		LinkedList<Journo> journos = new LinkedList<Journo>();
+		
+		String sql = "SELECT * FROM journos";
+		// TODO: Need to LIMIT for pagination... find out more later
+		
 		List<Map<String,Object>> rows = null;
 		
 		try {
@@ -151,11 +153,14 @@ public class JournoDaoImpl implements JournoDao {
 		
 		for(Map<String,Object> row : rows) {
 			Journo journo = new Journo();
+			
 			journo.setUuid((UUID)row.get("uuid"));
 			journo.setFullname((String)row.get("fullname"));
 			journo.setStatus((int)row.get("status"));
 			journo.setOverallScore((int)row.get("overallscore"));
 			journo.setBio((String)row.get("bio"));
+			
+			journos.add(journo);
 		}
 		
 		return journos;
