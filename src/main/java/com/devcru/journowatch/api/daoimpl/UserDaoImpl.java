@@ -35,25 +35,29 @@ public class UserDaoImpl implements UserDao {
 	// whereas queryForWhatever() does not
 	ResultSetExtractor<String> rse = new ResultSetExtractor<String>() {
 		@Override
-		public String extractData(ResultSet rs) throws SQLException,
-				DataAccessException {
+		public String extractData(ResultSet rs) throws SQLException, DataAccessException {
 			return (rs.next() ? rs.getString(1) : null);
 		}
 	};
 	
 	ResultSetExtractor<Object> rseObject = new ResultSetExtractor<Object>() {
 		@Override
-		public Object extractData(ResultSet rs) throws SQLException,
-				DataAccessException {
+		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
 			return (rs.next() ? rs.getObject(1) : null);
 		}
 	};
 	
 	ResultSetExtractor<User> rseUser = new ResultSetExtractor<User>() {
 		@Override
-		public User extractData(ResultSet rs) throws SQLException,
-				DataAccessException {
+		public User extractData(ResultSet rs) throws SQLException, DataAccessException {
 			return (rs.next() ? (User) rs.getObject(1) : null);
+		}
+	};
+	
+	ResultSetExtractor<UUID> rseUuid = new ResultSetExtractor<UUID>() {
+		@Override
+		public UUID extractData(ResultSet rs) throws SQLException, DataAccessException {
+			return (rs.next() ? (UUID) rs.getObject(1) : null);
 		}
 	};
 	
@@ -192,21 +196,30 @@ public class UserDaoImpl implements UserDao {
 	
 	/* Helper methods */
 	
+	@Override
 	public boolean verifyCredentials(User user) {
 		boolean isSuccess = false;
 		
-		String sql = "";
+		String sql = "SELECT uuid FROM user WHERE username = ? AND password = ?";
+		
+    	UUID uuid = user.getUuid();
+    	String username = user.getUsername();
+    	String password = user.getPassword();
+    	
+    	// TODO: password encryption should happen here
+    	// String cryptPass = encryptPass(password);
+    	// then pass the encrypted pass as the SQL query password param
+    	
+    	uuid = template.query(sql, new Object[]{username, password}, rseUuid);
+    	
+    	if(null != uuid) {
+    		isSuccess = true;
+    	} else isSuccess = false;
 		
 		return isSuccess;
 	}
 	
 	/* FIXME: The follow three methods  should go elsewhere */
-
-	@Override
-	public void login() {
-		String loginSql = "";
-		template.execute(loginSql);
-	}
 
 	@Override
 	public void rateVenue() {

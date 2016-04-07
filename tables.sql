@@ -24,7 +24,7 @@ CREATE TABLE journos
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	fullname character varying(16) NOT NULL,
-	status character varying(32), -- integer NOT NULL DEFAULT -1, ???
+	status integer NOT NULL DEFAULT (-1), -- -1 is unknown, 0 is inactive, 1 is active
 	overallscore integer NOT NULL DEFAULT (-1),
 	bio character varying(2048),
 	CONSTRAINT journos_pkey PRIMARY KEY (uuid)
@@ -39,7 +39,7 @@ CREATE TABLE venues
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	name character varying(16) NOT NULL,
-	status integer, -- -1 is unknown, 0 is inactive, 1 is active
+	status integer NOT NULL DEFAULT (-1), -- -1 is unknown, 0 is inactive, 1 is active
 	overallscore integer NOT NULL DEFAULT -1,
 	bio character varying(2048)
 )
@@ -53,7 +53,7 @@ CREATE TABLE journoratings
 (
 	uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
 	"timestamp" timestamp with time zone NOT NULL DEFAULT now(),
-	status integer, -- user banned/inactive/deleted, etc
+	status integer NOT NULL DEFAULT (-1), -- user banned/inactive/deleted, etc
 	owneruuid uuid,
 	journouuid uuid,
 	score integer NOT NULL DEFAULT (-1),

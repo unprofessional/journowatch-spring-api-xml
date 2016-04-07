@@ -89,11 +89,8 @@ public class UserService {
 	 * 
 	 */
 
-	public static boolean verifyCredentials(User user) {
-		boolean isSuccess = false;
-
-		// isSuccess = userServ.verifyCredentials(user);
-
+	public boolean verifyCredentials(User user) {
+		boolean isSuccess = ud.verifyCredentials(user);
 		return isSuccess;
 	}
 

@@ -20,7 +20,8 @@ public interface UserDao {
 	//public User getUserViaUsername(String username);
 
 	// Maybe methods?
-    public void login();
+    public boolean verifyCredentials(User user);
+    
     public void rateVenue();
     public void rateJourno();
 

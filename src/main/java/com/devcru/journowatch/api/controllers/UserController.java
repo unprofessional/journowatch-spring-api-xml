@@ -136,15 +136,7 @@ public class UserController {
     	return "Yotsuba!!";    	
     }
     
-    @RequestMapping(value="login", method=RequestMethod.POST)
-    public static Object logTheFuckIn(User user) {
-    	// TODO: boolean status = userServ.logTheFuckIn(user);
-    	// XXX: Still not sure if this method will be necessary....
-    	// most likely belongs in Service Class if so, anyway
-        return null;
-    }
-    
-    @RequestMapping(value="/{ouuid}/journo/{juuid]", method=RequestMethod.GET)
+    @RequestMapping(value="/{ouuid}/journo/{juuid}", method=RequestMethod.GET)
     @ResponseBody
     public JournoRating getRating(@PathVariable("ouuid") UUID ouuid, @PathVariable("juuid") UUID juuid) {
     	JournoRating journorating = new JournoRating();
@@ -152,6 +144,14 @@ public class UserController {
     	journorating.setJournouuid(juuid);
     	journorating = ratingServ.getRating(journorating); 
     	return journorating;
+    }
+    
+    @RequestMapping(value="/authenticator", method=RequestMethod.POST)
+    @ResponseBody
+    public boolean verifyCredentials(User user) {
+    	boolean isSuccess = false;    	
+    	isSuccess = userServ.verifyCredentials(user);    	
+    	return isSuccess;
     }
 
 }

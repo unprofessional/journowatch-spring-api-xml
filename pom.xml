@@ -13,6 +13,7 @@
 	<properties>
 		<spring.version>4.2.4.RELEASE</spring.version>
 		<spring.security.version>4.0.3.RELEASE</spring.security.version>
+		<oauth2.version>1.0.5.RELEASE</oauth2.version>
 	</properties>
 
 	<dependencies>
@@ -62,11 +63,11 @@
 		</dependency>
 
 		<!-- SPRING SECURITY -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.security</groupId> -->
-<!-- 			<artifactId>spring-security-core</artifactId> -->
-<!-- 			<version>${spring.security.version}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -81,11 +82,11 @@
 			<version>${spring.security.version}</version>
 		</dependency>
 
-		<!-- <dependency> -->
-			<!-- <groupId>org.springframework.security</groupId> -->
-			<!-- <artifactId>spring-security-acl</artifactId> -->
-			<!-- <version>${spring.security.version}</version> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-acl</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 
 		<!-- Needed for Freemarker FreeMarkerConfigurer stuff -->
 		<dependency>
@@ -125,6 +126,27 @@
 			<artifactId>java-property-utils</artifactId>
 			<version>1.7.1</version>
 		</dependency>
+		
+		<!-- OAuth 2.0 dependencies -->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+			<version>${oauth2.version}</version>
+		</dependency>
+
+		<!-- Base64 Commons Codec (Required, apparently) -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
 
 		<!-- JDBC postgresql driver: Can still use this with a 9.2 instance -->
 		<dependency>
