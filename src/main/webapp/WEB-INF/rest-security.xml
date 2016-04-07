@@ -97,7 +97,7 @@
 	<authentication-manager alias="authenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
 		<authentication-provider>
-			<password-encoder ref="encoder" />
+<!-- 			<password-encoder ref="encoder" /> -->
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="SELECT username, password, true AS enabled FROM users WHERE username = ?"
 				authorities-by-username-query="SELECT username, user_role FROM users WHERE username = ?" />
