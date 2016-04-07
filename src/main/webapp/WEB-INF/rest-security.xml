@@ -37,7 +37,7 @@
 		xmlns="http://www.springframework.org/schema/security"
 		use-expressions="true" >
 		<anonymous enabled="false" />
-		<intercept-url pattern="/**" access="hasAnyRole('ROLE_USER')" />
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 	</http>
@@ -66,23 +66,11 @@
 		<constructor-arg>
 			<list>
 				<bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
-				<bean class="org.springframework.security.access.vote.RoleVoter" />
+				<bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
 				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
 			</list>
 		</constructor-arg>
 	</bean>
-
-<!-- 	<bean id="dbUrl" class="java.net.URI"> -->
-<!-- 		<constructor-arg value="#{systemEnvironment['DATABASE_URL']}" /> -->
-<!-- 	</bean> -->
-
-<!-- 	<bean id="dataSource" -->
-<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!-- 		<property name="url" -->
-<!-- 			value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" /> -->
-<!-- 		<property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }" /> -->
-<!-- 		<property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" /> -->
-<!-- 	</bean> -->
 	
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		id="dataSource">
