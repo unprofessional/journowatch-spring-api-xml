@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,7 +77,10 @@ public class UserDaoImpl implements UserDao {
 		int role = user.getRole();
 		String password = user.getPassword();
 		
-		Object[] attributes = new Object[]{username, email, firstName, lastName, role, password};
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(password);
+		
+		Object[] attributes = new Object[]{username, email, firstName, lastName, role, encodedPassword};
 		for(int i = 0; i < attributes.length; i++) {
 			System.out.println("attributes[i]: " + attributes[i]);
 			System.out.println("attributes[i].getClass(): " + attributes[i].getClass());

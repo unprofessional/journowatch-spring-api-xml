@@ -15,7 +15,7 @@
 	<http pattern="/oauth/token" create-session="stateless"
 		authentication-manager-ref="clientAuthenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
-		<intercept-url pattern="/oauth/token" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/oauth/token" access="hasRole('IS_AUTHENTICATED_FULLY')" />
 		<anonymous enabled="false" />
 		<http-basic entry-point-ref="clientAuthenticationEntryPoint" />
 		<!-- include this only if you need to authenticate clients via request parameters -->
@@ -82,9 +82,9 @@
 	</bean>
 
 	<!-- Password Encoder BCrypt -->
-<!-- 	<bean id="encoder" -->
-<!-- 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->
-<!-- 	</bean> -->
+	<bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	</bean>
 
 	<!-- Authentication in config file -->
 	<authentication-manager id="clientAuthenticationManager"
@@ -95,7 +95,7 @@
 	<authentication-manager alias="authenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
 		<authentication-provider>
-<!-- 			<password-encoder ref="encoder" /> -->
+			<password-encoder ref="encoder" />
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="SELECT username, password, true AS enabled FROM users WHERE username = ?"
 				authorities-by-username-query="SELECT username, user_role FROM users WHERE username = ?" />
