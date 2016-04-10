@@ -82,9 +82,9 @@
 	</bean>
 
 	<!-- Password Encoder BCrypt -->
-	<bean id="encoder"
-		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-	</bean>
+<!-- 	<bean id="encoder" -->
+<!-- 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->
+<!-- 	</bean> -->
 
 	<!-- Authentication in config file -->
 	<authentication-manager id="clientAuthenticationManager"
