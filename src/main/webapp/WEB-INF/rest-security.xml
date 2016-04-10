@@ -37,7 +37,7 @@
 		xmlns="http://www.springframework.org/schema/security"
 		use-expressions="true" >
 		<anonymous enabled="false" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/users/**" access="hasRole('ROLE_USER')" />
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 	</http>
