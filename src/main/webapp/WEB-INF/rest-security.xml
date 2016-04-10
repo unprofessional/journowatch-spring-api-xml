@@ -15,7 +15,7 @@
 	<http pattern="/oauth/token" create-session="stateless"
 		authentication-manager-ref="clientAuthenticationManager"
 		xmlns="http://www.springframework.org/schema/security">
-		<intercept-url pattern="/oauth/token" access="hasRole('IS_AUTHENTICATED_FULLY')" />
+		<intercept-url pattern="/oauth/token" access="hasRole('ROLE_USER')" />
 		<anonymous enabled="false" />
 		<http-basic entry-point-ref="clientAuthenticationEntryPoint" />
 		<!-- include this only if you need to authenticate clients via request parameters -->
@@ -31,30 +31,14 @@
 	</http>
 
 	<!-- Protected resources (Customizable) -->
-<!-- 	<http pattern="/users/**" create-session="never" -->
-<!-- 		entry-point-ref="oauthAuthenticationEntryPoint" -->
-<!-- 		access-decision-manager-ref="accessDecisionManager" -->
-<!-- 		xmlns="http://www.springframework.org/schema/security" -->
-<!-- 		use-expressions="true" > -->
-<!-- 		<anonymous enabled="false" /> -->
-<!-- 		<intercept-url pattern="/users/**" access="hasRole('ROLE_USER')" /> -->
-<!-- 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" /> -->
-<!-- 		<access-denied-handler ref="oauthAccessDeniedHandler" /> -->
-<!-- 	</http> -->
-
-	<http pattern="/oauth/token" create-session="stateless"
-		authentication-manager-ref="clientAuthenticationManager"
-		xmlns="http://www.springframework.org/schema/security">
-		<intercept-url pattern="/**" method="GET" access="ROLE_DENY" />
-		<intercept-url pattern="/**" method="PUT" access="ROLE_DENY" />
-		<intercept-url pattern="/**" method="DELETE" access="ROLE_DENY" />
-		<intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY" />
+	<http pattern="/users/**" create-session="never"
+		entry-point-ref="oauthAuthenticationEntryPoint"
+		access-decision-manager-ref="accessDecisionManager"
+		xmlns="http://www.springframework.org/schema/security"
+		use-expressions="true" >
 		<anonymous enabled="false" />
-		<http-basic entry-point-ref="clientAuthenticationEntryPoint" />
-		<!-- include this only if you need to authenticate clients via request 
-			parameters -->
-		<custom-filter ref="clientCredentialsTokenEndpointFilter"
-			after="BASIC_AUTH_FILTER" />
+		<intercept-url pattern="/users/**" access="hasRole('ROLE_USER')" />
+		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 	</http>
 
