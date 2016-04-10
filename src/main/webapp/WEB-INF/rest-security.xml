@@ -26,20 +26,20 @@
 
 	<!-- Unprotected resources -->
 	<!-- Registration should be accessible to anyone -->
-	<http pattern="/users/" create-session="never" security="none"
+	<http pattern="/users/" create-session="never"
+		security="none"
 		xmlns="http://www.springframework.org/schema/security">
 	</http>
-
+	
 	<!-- Protected resources (Customizable) -->
 	<http pattern="/users/**" create-session="never"
-		entry-point-ref="oauthAuthenticationEntryPoint"
-		access-decision-manager-ref="accessDecisionManager"
-		xmlns="http://www.springframework.org/schema/security"
-		use-expressions="true" >
-		<anonymous enabled="false" />
-		<intercept-url pattern="/users/**" access="hasRole('ROLE_USER')" />
-		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
-		<access-denied-handler ref="oauthAccessDeniedHandler" />
+	      entry-point-ref="oauthAuthenticationEntryPoint"
+	      access-decision-manager-ref="accessDecisionManager"
+	      xmlns="http://www.springframework.org/schema/security">
+	    <anonymous enabled="false"/>
+	    <intercept-url pattern="/users/**" access="ROLE_USER"/>
+	    <custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER"/>
+	    <access-denied-handler ref="oauthAccessDeniedHandler"/>
 	</http>
 
 	<bean id="oauthAuthenticationEntryPoint"
@@ -62,14 +62,14 @@
 	</bean>
 
 	<bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased"
-		xmlns="http://www.springframework.org/schema/beans">
-		<constructor-arg>
-			<list>
-				<bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
-				<bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
-				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
-			</list>
-		</constructor-arg>
+	      xmlns="http://www.springframework.org/schema/beans">
+	    <constructor-arg>
+	        <list>
+	            <bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter"/>
+	            <bean class="org.springframework.security.access.vote.RoleVoter"/>
+	            <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
+	        </list>
+	    </constructor-arg>
 	</bean>
 	
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
