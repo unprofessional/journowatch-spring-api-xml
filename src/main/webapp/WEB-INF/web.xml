@@ -65,15 +65,15 @@
 
 
 	<!-- Redirect HTTP to HTTPS -->
-<!-- 	<security-constraint> -->
-<!-- 		<web-resource-collection> -->
-<!-- 			<web-resource-name>Protected Context</web-resource-name> -->
-<!-- 			<url-pattern>/*</url-pattern> -->
-<!-- 		</web-resource-collection> -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Protected Context</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
 		<!-- Auth-constraint goes here if you require authentication -->
-<!-- 		<user-data-constraint> -->
-<!-- 			<transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
-<!-- 		</user-data-constraint> -->
-<!-- 	</security-constraint> -->
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
 
 </web-app>
