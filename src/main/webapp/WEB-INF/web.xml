@@ -28,8 +28,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/rest-dispatcher-servlet.xml,
-			/WEB-INF/rest-security.xml
+			/WEB-INF/rest-dispatcher-servlet.xml
 		</param-value>
 	</context-param>
 
