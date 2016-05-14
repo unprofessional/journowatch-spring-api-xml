@@ -78,3 +78,20 @@ CREATE TABLE partnerships
 WITH (
 	OIDS=FALSE
 );
+
+-- Table: articles
+
+DROP TABLE articles;
+CREATE TABLE articles
+(
+  uuid uuid NOT NULL DEFAULT uuid_generate_v4(),
+  authorname character varying(128),
+  title character varying(128),
+  brief character varying(1024),
+  datepublished date,
+  overallscore integer NOT NULL DEFAULT (-1),
+  CONSTRAINT articles_pkey PRIMARY KEY (uuid)
+)
+WITH (
+  OIDS=FALSE
+);
