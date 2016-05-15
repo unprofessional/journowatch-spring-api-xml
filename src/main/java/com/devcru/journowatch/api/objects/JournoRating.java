@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JournoRating {
 
-	// TODO: Consider making a status field
-
 	@JsonProperty("uuid")
 	private UUID uuid;
 	@JsonProperty("timestamp")
