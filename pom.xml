@@ -163,20 +163,6 @@
 	</dependencies>
 
 	<!-- OpenShift -->
-	<repositories>
-		<repository>
-			<id>eap</id>
-			<url>http://maven.repository.redhat.com/techpreview/all</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<!-- OpenShift -->
 	<pluginRepositories>
 		<pluginRepository>
 			<id>eap</id>
