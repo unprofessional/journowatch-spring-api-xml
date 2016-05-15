@@ -10,7 +10,7 @@ public class Article {
 	@JsonProperty("uuid")
 	private UUID uuid;
 	@JsonProperty("authorname")
-	private String authorName;
+	private String authorname;
 	@JsonProperty("title")
 	private String title;
 	@JsonProperty("brief")
@@ -29,11 +29,11 @@ public class Article {
 	}
 
 	public String getAuthorName() {
-		return authorName;
+		return authorname;
 	}
 
 	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
+		this.authorname = authorName;
 	}
 
 	public String getTitle() {
