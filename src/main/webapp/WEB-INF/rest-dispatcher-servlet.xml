@@ -40,25 +40,25 @@
 		<!-- <property name="validationQuery" value="SELECT version()"></property> -->
 	</bean>
 
-<!-- 	<bean id="userDao" class="com.devcru.journowatch.api.daoimpl.UserDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<bean id="userDao" class="com.devcru.journowatch.api.daoimpl.UserDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-<!-- 	<bean id="journoDao" class="com.devcru.journowatch.api.daoimpl.JournoDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<bean id="journoDao" class="com.devcru.journowatch.api.daoimpl.JournoDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	
-<!-- 	<bean id="venueDao" class="com.devcru.journowatch.api.daoimpl.VenueDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<bean id="venueDao" class="com.devcru.journowatch.api.daoimpl.VenueDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-<!-- 	<bean id="journoRatingDao" class="com.devcru.journowatch.api.daoimpl.JournoRatingDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<bean id="journoRatingDao" class="com.devcru.journowatch.api.daoimpl.JournoRatingDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	
-<!-- 	<bean id="partnershipDao" class="com.devcru.journowatch.api.daoimpl.PartnershipDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="dataSource" /> -->
-<!-- 	</bean> -->
+	<bean id="partnershipDao" class="com.devcru.journowatch.api.daoimpl.PartnershipDaoImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 	<bean id="freeMarkerConfigurationFactory"
 		class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
